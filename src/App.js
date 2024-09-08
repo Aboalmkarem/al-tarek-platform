@@ -1,52 +1,26 @@
-
-import './App.css'
-import background from './image/Untitled-1.png'
-import image from './image/logo.png'
-import atom from './image/—Pngtree—atom icon_8473596.png'
+import "./App.css";
+import useLocalStorage from 'use-local-storage';
+import Navbar from "./Componants/navbar";
+import LandingPage from "./Componants/landingPage";
+import Courses from "./Componants/courses";
 
 function App() {
+  const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [isDark, setIsDark] = useLocalStorage("isDark", preference);
   return (
-    <div>
-      {/* header */}
-    <header>
-      <img src={image} alt="Logo" />
-      <ul>
-        <li className="li1">
-          <a href="#">سجل دخول</a>
-        </li>
-        <li className="li2">
-          <a href="#">انشئ حساب</a>
-        </li>
-      </ul>
-    </header>
+    <div className="app" data-theme={isDark ? "dark" : "light"}>
+      {/* navbar start */}
+      <Navbar isChecked={isDark} handleChange={() => {setIsDark(!isDark)}}></Navbar>
+      {/* navbar end */}
 
-    {/* end header */}
+      {/* main start */}
+      <LandingPage></LandingPage>
+      {/* main end */}
 
-
-    {/* start main */}
-    <div className="main">
-    <img className="atom" src={atom} alt="Atom Icon" />
-    
-    <div className="main-img">
-      <img src={background} alt="Main Image" />
+      {/* courses start */}
+      <Courses></Courses>
+      {/* courses end */}
     </div>
-  
-    <img className="atom-2" src={atom} alt="Atom Icon" />
-  
-    <div className="main-content">
-      <h1>منصه <span>الطارق</span></h1>
-      <h2>أول منصه تعليمية باستعمال <span>الذكاء الاصطناعي</span></h2>
-      
-      <div className="main-btn">
-        <a className="btn" href="#cs">يلا بينا <span>نتعلم</span></a>
-      </div>
-    </div>
-   </div>
-   {/* end main */}
-  </div>
-    
-
-
   );
 }
 
