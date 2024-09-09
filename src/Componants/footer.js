@@ -2,7 +2,9 @@ import logo from '../Assets/logo.png'
 
 const Footer = () => {
     return (
-        <footer className="footer bg-neutral text-neutral-content p-10">
+        <div>
+            <div className='space'></div>
+            <footer className="footer bg-neutral text-neutral-content p-10">
             <aside>
                 <img src={logo}></img>
                 <p>
@@ -50,6 +52,9 @@ const Footer = () => {
                 </div>
             </nav>
         </footer>
+
+        </div>
+        
     );
 };
 
