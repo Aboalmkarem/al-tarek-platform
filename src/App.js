@@ -3,6 +3,9 @@ import useLocalStorage from 'use-local-storage';
 import Navbar from "./Componants/navbar";
 import LandingPage from "./Componants/landingPage";
 import Courses from "./Componants/courses";
+import List from "./Componants/List";
+
+
 
 function App() {
   const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -17,9 +20,12 @@ function App() {
       <LandingPage></LandingPage>
       {/* main end */}
 
+      
+      <List></List>
       {/* courses start */}
       <Courses></Courses>
       {/* courses end */}
+      
     </div>
   );
 }
