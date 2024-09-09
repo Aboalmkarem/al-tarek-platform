@@ -7,11 +7,13 @@
 }
 :root {
   --white-primary: #fff;
-  --color-secondary: #f8312f;
+  --color-secondary: #ff24b6;
+  --third-color: #000
 }
 [data-theme="dark"] {
-  --white-primary: #414141;
-  --color-secondary: #33beea;
+  --white-primary: #353535;
+  --color-secondary: #ffd900;
+  --third-color: #fff
 }
 header {
     background-color: var(--white-primary);
@@ -40,9 +42,10 @@ header ul {
 }
 header ul .li1 {
     margin: 0 15px;
-    color: black;
+    font-family: "Cairo", sans-serif;
+    color: var(--third-color);
     align-items: center;
-    background-color: #fff;
+    background-color: var(--white-primary);
     width: 150px;
     display: flex;
     justify-content: center;
@@ -50,12 +53,12 @@ header ul .li1 {
 }
 header ul .li1:hover {
     transform: scale(1.1);
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    box-shadow: 0px 0px 5px var(--third-color);
     border-radius: 5px;
 }
 
 header ul .li1 a {
-    color: black;
+    color: var(--third-color) ;
     text-decoration: none;
     font-size: 28px;
     margin-bottom: 10px;
@@ -67,20 +70,20 @@ header ul .li1 a {
     background-color: #33beea;
     border: 2px solid #33beea;
     font-size: 28px;
-    
+    font-family: "Beiruti", sans-serif;
     border-radius: 8px;
     
     width: 150px;
     text-align: center;
 }
 .li2:hover {
-    background-color: #fff;
+    background-color: var(--white-primary);
     color: #33beea;
 }
 
 header ul .li2 a {
     text-decoration: none;
-    color: #ad4109;
+    color: #ffd900;
 }
 
 /*main*/
@@ -179,6 +182,7 @@ header ul .li2 a {
     font-size: 60px;
     margin-left: 40px;
     font-family: "Cairo", sans-serif;
+    color: var(--third-color);
 }
 .main .main-content h1 span {
     font-size: 110px;
@@ -187,6 +191,7 @@ header ul .li2 a {
 }
 .main .main-content h2 {
     font-size: 40px;
+    color: var(--third-color);
     font-family: "Beiruti", sans-serif;
 }
 .main .main-content h2 span {
@@ -256,31 +261,38 @@ header ul .li2 a {
     height: 300px;
 }
 .card-des{
-    background-color: rgb(34, 33, 33);
+    background-color: var(--white-primary);
     width: 370px;
     position: relative;
     left: 13%;
     bottom: 30px;
     padding: 5px 12px;
+    box-shadow: 10px 10px 100px rgb(26, 25, 25);
+    border: 3px solid #33beea;
 
 }
 .card-des:hover{
-    transform: scale(1.1);
+    transform: scale(0.9);
 }
 .card-des h1{
-    color: aliceblue;
+    color: var(--third-color);
     font-size: 32px;
     font-weight: 800;
-    text-decoration: underline;
-    left: 40px;
+    left: 30px;
     position: relative;
+    font-family: "Cairo", sans-serif;
     
 }
 
 .card-des p{
     color: aqua;
-    font-size: 20px;
+    font-size: 25px;
     margin-top: 4px;
+    font-family: "Beiruti", sans-serif;
+}
+.card-des p span{
+    color: var(--color-secondary);
+    font-family: "Cairo", sans-serif;
 }
 /*end courses*/
 
@@ -307,10 +319,11 @@ header ul .li2 a {
     font-size: 60px;
     font-family: "Cairo", sans-serif;
     font-weight: 700;
+    color: var(--white-primary);
 }
 .list-text span{
     color: #f0ff24;
-    text-decoration:underline;
+    
     font-family: "Beiruti", sans-serif;
     font-weight: 900;
 }

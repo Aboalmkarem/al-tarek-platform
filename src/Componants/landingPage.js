@@ -37,7 +37,7 @@ const LandingPage = () => {
                     <img src={icon} alt="Chemistry Sticker" />
                 </div>
                 <div className="list-text">
-                    هنشرحلك منهج <span>الكيمياء</span> للصف الثاني الثانوي بكل
+                    هنشرحلك منهج <span>  الفزياء و الكيمياء</span> للصف الثاني الثانوي بكل
                     بساطه وسهوله
                 </div>
             </div>
@@ -49,7 +49,7 @@ const LandingPage = () => {
                     </div>
                     <div className="card-des">
                         <h1>الصف الثاني الثانوي</h1>
-                        <p>شرح منهج الكيمياء الصف الثاني الثانوي</p>
+                        <p>شرح منهج <span>الكيمياء</span> الصف الثاني الثانوي</p>
                     </div>
                 </a>
 
@@ -59,7 +59,7 @@ const LandingPage = () => {
                     </div>
                     <div className="card-des">
                         <h1>الصف الثاني الثانوي</h1>
-                        <p>شرح منهج الفيزياء الصف الثاني الثانوي</p>
+                        <p>شرح منهج <span>الفيزياء</span> الصف الثاني الثانوي</p>
                     </div>
                 </a>
             </div>
