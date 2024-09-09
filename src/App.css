@@ -3,25 +3,32 @@
 * {
     margin: 0;
     padding: 0;
+    transition: background-color .15s ease-in-out;
 }
 :root {
-  --color-primary: #33beea;
+  --white-primary: #fff;
   --color-secondary: #f8312f;
 }
 [data-theme="dark"] {
-  --color-primary: #f8312f;
+  --white-primary: #414141;
   --color-secondary: #33beea;
 }
 header {
-    background-color: #fff;
+    background-color: var(--white-primary);
     height: 80px;
     width: 100%;
     padding: 5px;
+    padding-inline: 2rem;
     justify-content: space-between;
     display: flex;
     position: fixed;
     z-index: 999;
-    box-shadow: 0.5px 0.5px 12px #33beea;
+    box-shadow: 0 8px 8px -4px lightblue;
+}
+header .left-icons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 header img {
     height: 65px;
@@ -36,13 +43,14 @@ header ul .li1 {
     color: black;
     align-items: center;
     background-color: #fff;
-    padding: 20px;
-    
-    padding-top: 10px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    transition: all .25s ease-in-out;
 }
 header ul .li1:hover {
     transform: scale(1.1);
-    box-shadow: 0.5px 0.5px 7px black;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     border-radius: 5px;
 }
 
@@ -200,9 +208,8 @@ header ul .li2 a {
     display: flex;
     cursor: pointer;
     color: #000000;
-
+    transition: all .25s ease-in-out;
     box-shadow: 1px 1px 10px #f3c304;
-
 }
 .main .main-content .main-btn:hover {
     transform: scale(1.1);

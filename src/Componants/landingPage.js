@@ -29,6 +29,7 @@ const LandingPage = () => {
                     </a>
                 </div>
             </div>
+            
         </div>
     );
 };
