@@ -25,7 +25,7 @@ const LandingPage = () => {
 
                 <div className="main-btn">
                     <a className="btn" href="#cs">
-                        يلا بينا <span>نتعلم</span>
+                    نتعلم<span>يلا بينا</span>
                     </a>
                 </div>
             </div>
