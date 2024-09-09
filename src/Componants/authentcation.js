@@ -51,7 +51,7 @@ const Authentcation = () => {
                         </a>
                         <p className="mb-0 mt-4 text-center">
                           <a href="#0" className="link">
-                            Forget your password?
+                            Forgot your password?
                           </a>
                         </p>
                       </div>
