@@ -47,14 +47,14 @@ const Navbar = ({ isChecked, handleChange }) => {
                     </svg>
                 </label>
             </div>
-            <ul>
-                <li className="li1">
+            <div className="right-buttons">
+                <button className="btn btn-ghost btn-xs sm:btn-sm md:btn-md lg:btn-lg">
                     <Link to="/authintcation">سجل دخول</Link>
-                </li>
-                <li className="li2">
+                </button>
+                <button className="btn btn-info btn-xs sm:btn-sm md:btn-md lg:btn-lg">
                     <Link to="/authintcation">انشئ حساب</Link>
-                </li>
-            </ul>
+                </button>
+            </div>
         </header>
     );
 };
