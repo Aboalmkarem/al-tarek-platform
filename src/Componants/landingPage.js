@@ -24,9 +24,9 @@ const LandingPage = () => {
                         أول منصه تعليمية باستعمال <span>الذكاء الاصطناعي</span>
                     </h2>
 
-                    <div className="main-btn">
-                        <a className="btn" href="#cs">
-                            نتعلم<span>يلا بينا</span>
+                    <div className="main-btnm">
+                        <a className="btnm" href="#cs">
+                            يلا بينا <span> نتعلم</span>
                         </a>
                     </div>
                 </div>
