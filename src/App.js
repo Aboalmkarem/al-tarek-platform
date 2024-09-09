@@ -4,6 +4,7 @@ import Navbar from "./Componants/navbar";
 import LandingPage from "./Componants/landingPage";
 import Authentication from "./Componants/authentcation";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Footer from "./Componants/footer";
 
 function App() {
     const preference = window.matchMedia(
@@ -23,10 +24,14 @@ function App() {
                 {/* navbar end */}
                 <Routes>
                     {/* landing page start */}
-                    <Route path="/al-tarek-platform" element={<LandingPage />} />
+                    <Route
+                        path="/al-tarek-platform"
+                        element={<LandingPage />}
+                    />
                     {/* landing page end */}
                     <Route path="/authintcation" element={<Authentication />} />
                 </Routes>
+                <Footer></Footer>
             </BrowserRouter>
         </div>
     );
