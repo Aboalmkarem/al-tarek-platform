@@ -3,25 +3,26 @@
 * {
     margin: 0;
     padding: 0;
-    transition: background-color .15s ease-in-out;
+    transition: background-color 0.15s ease-in-out;
 }
 :root {
-  --white-primary: #fff;
-  --color-secondary: #ff24b6;
-  --third-color: #000
+    --white-primary: #fff;
+    --color-secondary: #ff24b6;
+    --third-color: #000;
 }
 [data-theme="dark"] {
-  --white-primary: #353535;
-  --color-secondary: #ffd900;
-  --third-color: #fff
+    --white-primary: #353535;
+    --color-secondary: #ffd900;
+    --third-color: #fff;
 }
 header {
     background-color: var(--white-primary);
-    height: 80px;
+    height: 5rem;
     width: 100%;
-    padding: 5px;
+    /* padding: 5px; */
     padding-inline: 2rem;
-    justify-content: space-between;
+    padding-block: 0.5rem;
+    /* justify-content: space-between; */
     display: flex;
     position: fixed;
     z-index: 999;
@@ -29,27 +30,28 @@ header {
 }
 header .left-icons {
     display: flex;
+    flex-grow: 1;
     align-items: center;
     gap: 1rem;
 }
 header img {
-    height: 65px;
+    max-height: 5rem;
 }
-header ul {
+/* header ul {
     list-style: none;
     display: flex;
-    margin: 8px;
+    margin: .5rem;
 }
 header ul .li1 {
-    margin: 0 15px;
+    margin: 0 15px; 
     font-family: "Cairo", sans-serif;
     color: var(--third-color);
     align-items: center;
-    background-color: var(--white-primary);
+    background-color: transparent;
     width: 150px;
     display: flex;
     justify-content: center;
-    transition: all .25s ease-in-out;
+    transition: transform .25s ease-in-out;
 }
 header ul .li1:hover {
     transform: scale(1.1);
@@ -84,6 +86,13 @@ header ul .li1 a {
 header ul .li2 a {
     text-decoration: none;
     color: #ffd900;
+} */
+header .right-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 /*main*/
@@ -119,7 +128,6 @@ header ul .li2 a {
 }
 .main .main-img {
     position: relative;
-
     height: 100%;
     margin-top: 100px;
 }
@@ -213,7 +221,7 @@ header ul .li2 a {
     display: flex;
     cursor: pointer;
     color: #000000;
-    transition: all .25s ease-in-out;
+    transition: all 0.25s ease-in-out;
     box-shadow: 1px 1px 10px #f3c304;
 }
 .main .main-content .main-btn:hover {
@@ -238,7 +246,7 @@ header ul .li2 a {
 
 /*courses-section*/
 
-.courses{
+.courses {
     display: flex;
     width: 100%;
     height: 100vh;
@@ -247,20 +255,19 @@ header ul .li2 a {
     background-color: #33beea;
     margin-top: 30px;
     border-radius: 10px;
-    
 }
-.card{
+.card {
     width: 500px;
     height: 300px;
 }
-.card-img{
+.card-img {
     width: 100%;
 }
-.card-img img{
+.card-img img {
     width: 500px;
     height: 300px;
 }
-.card-des{
+.card-des {
     background-color: var(--white-primary);
     width: 370px;
     position: relative;
@@ -269,39 +276,38 @@ header ul .li2 a {
     padding: 5px 12px;
     box-shadow: 10px 10px 100px rgb(26, 25, 25);
     border: 3px solid #33beea;
-
+    transition: transform 0.15s ease-in-out;
 }
-.card-des:hover{
+.card-des:hover {
     transform: scale(0.9);
 }
-.card-des h1{
+.card-des h1 {
     color: var(--third-color);
     font-size: 32px;
     font-weight: 800;
     left: 30px;
     position: relative;
     font-family: "Cairo", sans-serif;
-    
 }
 
-.card-des p{
+.card-des p {
     color: aqua;
     font-size: 25px;
     margin-top: 4px;
     font-family: "Beiruti", sans-serif;
 }
-.card-des p span{
+.card-des p span {
     color: var(--color-secondary);
     font-family: "Cairo", sans-serif;
 }
 /*end courses*/
 
 /*list*/
-.list{
+.list {
     width: 100%;
     height: 85vh;
     margin: 100px 0;
-    border-radius: 30% 0 0 30% ;
+    border-radius: 30% 0 0 30%;
     background-color: #33beea;
     display: inline-block;
     justify-content: space-between;
@@ -309,21 +315,21 @@ header ul .li2 a {
     text-align: center;
     display: flex;
 }
-.list-img{
+.list-img {
     margin: 40px;
 }
-.list-img img{
+.list-img img {
     width: 600px;
 }
-.list-text{
+.list-text {
     font-size: 60px;
     font-family: "Cairo", sans-serif;
     font-weight: 700;
     color: var(--white-primary);
 }
-.list-text span{
+.list-text span {
     color: #f0ff24;
-    
+
     font-family: "Beiruti", sans-serif;
     font-weight: 900;
 }

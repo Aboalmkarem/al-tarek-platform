@@ -5,6 +5,7 @@ import LandingPage from "./Componants/landingPage";
 import Authentication from "./Componants/authentcation";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./Componants/footer";
+import Course from "./Componants/course";
 
 function App() {
     const preference = window.matchMedia(
@@ -30,6 +31,7 @@ function App() {
                     />
                     {/* landing page end */}
                     <Route path="/authintcation" element={<Authentication />} />
+                    <Route path="/course" element={<Course />} />
                 </Routes>
                 <Footer></Footer>
             </BrowserRouter>

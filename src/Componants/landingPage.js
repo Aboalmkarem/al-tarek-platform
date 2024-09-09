@@ -3,6 +3,7 @@ import icon from "../Assets/chemistry-sticker-05.png";
 import atom from "../Assets/—Pngtree—atom icon_8473596.png";
 import chemImage from "../Assets/chem.jpg";
 import phyImage from "../Assets/phy.jpg";
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
     return (
@@ -43,7 +44,7 @@ const LandingPage = () => {
             </div>
             {/* ======== courses start ========== */}
             <div className="courses">
-                <a className="card" href="#">
+                <Link className="card" to='/course'>
                     <div className="card-img">
                         <img src={chemImage} alt="Course Image 1" />
                     </div>
@@ -51,9 +52,9 @@ const LandingPage = () => {
                         <h1>الصف الثاني الثانوي</h1>
                         <p>شرح منهج <span>الكيمياء</span> الصف الثاني الثانوي</p>
                     </div>
-                </a>
+                </Link>
 
-                <a className="card" href="#">
+                <Link className="card" to='/course'>
                     <div className="card-img">
                         <img src={phyImage} alt="Course Image-2 " />
                     </div>
@@ -61,7 +62,7 @@ const LandingPage = () => {
                         <h1>الصف الثاني الثانوي</h1>
                         <p>شرح منهج <span>الفيزياء</span> الصف الثاني الثانوي</p>
                     </div>
-                </a>
+                </Link>
             </div>
             {/* ======== landing page end ========== */}
         </div>
