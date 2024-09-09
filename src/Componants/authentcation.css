@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 
-.authentcation body{
+.authentcation {
 	font-family: 'Poppins', sans-serif;
 	font-weight: 300;
 	font-size: 15px;
 	line-height: 1.7;
 	color: #f3c304;
-	background-color: #33beea;
+	/* background-color: #33beea; */
 	overflow-x: hidden;
 }
 .authentcation a {
@@ -39,6 +39,16 @@
   position: relative;
   width: 100%;
   display: block;
+}
+.authentcation .container {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x)* .5);
+  padding-left: calc(var(--bs-gutter-x)* .5);
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 15rem;
 }
 .authentcation .full-height{
   min-height: 100vh;
