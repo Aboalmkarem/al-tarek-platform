@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import logo from "../Assets/logo.png";
 
 const Navbar = ({ isChecked, handleChange }) => {
     return (
         <header>
             <div className="left-icons">
-                <img src={logo} alt="Logo" />
+                <Link to='/al-tarek-platform'><img src={logo} alt="Logo" /></Link>
                 <label className="swap swap-rotate">
                     {/* this hidden checkbox controls the state */}
                     <input
@@ -34,10 +35,10 @@ const Navbar = ({ isChecked, handleChange }) => {
             </div>
             <ul>
                 <li className="li1">
-                    <a href="#">سجل دخول</a>
+                    <Link to='/authintcation'>سجل دخول</Link>
                 </li>
                 <li className="li2">
-                    <a href="#">انشئ حساب</a>
+                    <Link to='/authintcation'>انشئ حساب</Link>
                 </li>
             </ul>
         </header>
