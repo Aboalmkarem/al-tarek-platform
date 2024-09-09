@@ -48,12 +48,16 @@ const Navbar = ({ isChecked, handleChange }) => {
                 </label>
             </div>
             <div className="right-buttons">
-                <button className="btn btn-ghost btn-xs sm:btn-sm md:btn-md lg:btn-lg">
-                    <Link to="/authintcation">سجل دخول</Link>
-                </button>
-                <button className="btn btn-info btn-xs sm:btn-sm md:btn-md lg:btn-lg">
-                    <Link to="/authintcation">انشئ حساب</Link>
-                </button>
+                <Link to="/authintcation">
+                    <button className="btn btn-ghost btn-xs sm:btn-sm md:btn-md lg:btn-lg">
+                        سجل دخول
+                    </button>
+                </Link>
+                <Link to="/authintcation">
+                    <button className="btn btn-info btn-xs sm:btn-sm md:btn-md lg:btn-lg">
+                        انشئ حساب
+                    </button>
+                </Link>
             </div>
         </header>
     );
