@@ -55,7 +55,7 @@ const LandingPage = () => {
 
                 <a className="card" href="#">
                     <div className="card-img">
-                        <img src={phyImage} alt="Course Image 2" />
+                        <img src={phyImage} alt="Course Image-2 " />
                     </div>
                     <div className="card-des">
                         <h1>الصف الثاني الثانوي</h1>
