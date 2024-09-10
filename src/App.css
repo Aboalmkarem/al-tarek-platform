@@ -66,8 +66,9 @@ header .right-buttons {
     height: 50px;
     position: absolute;
     top: 50%;
-    left: 90%;
+    left: 94%;
     animation: rotate 10s infinite linear;
+    
 }
 .atom-3 {
     width: 100px;
@@ -134,7 +135,7 @@ header .right-buttons {
 .main .main-content {
     position: absolute;
     top: 20%;
-    left: 40%;
+    left: 43%;
 }
 .main .main-content h1 {
     font-size: 60px;
@@ -209,6 +210,7 @@ header .right-buttons {
 .card {
     width: 500px;
     height: 300px;
+    
 }
 .card-img {
     width: 100%;
