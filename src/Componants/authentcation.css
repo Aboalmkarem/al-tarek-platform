@@ -154,9 +154,16 @@
 
 .authentcation .form-group{ 
   position: relative;
-  display: block;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+.authentcation .form-group svg {
+  position: absolute;
+  top: .7rem;
+  left: .7rem;
+  font-size: 1.5rem;
+  color: #ffeba7;
 }
 .authentcation .form-style {
   padding: 13px 20px;

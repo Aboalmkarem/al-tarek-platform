@@ -1,7 +1,11 @@
 import "./authentcation.css";
 // import 'bootstrap/dist/css/bootstrap.min.css';
+import { MdOutlineLock, MdOutlineAlternateEmail } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
+import { useRef, useState } from "react";
 
-const Authentcation = () => {
+const Authentcation = ({auth}) => {
+    const authToggle = useRef()
     return (
         <div className="authentcation">
             <div className="section">
@@ -14,10 +18,13 @@ const Authentcation = () => {
                                     <span>Sign Up</span>
                                 </h6>
                                 <input
+                                    ref={authToggle}
                                     className="checkbox"
                                     type="checkbox"
                                     id="reg-log"
                                     name="reg-log"
+                                    checked={auth}
+                                    // onClick={() => { authToggle.current.checked = false }}
                                 />
                                 <label htmlFor="reg-log"></label>
                                 <div className="card-3d-wrap mx-auto">
@@ -38,6 +45,7 @@ const Authentcation = () => {
                                                             autoComplete="off"
                                                         />
                                                         {/* icon email */}
+                                                        <MdOutlineAlternateEmail />
                                                     </div>
                                                     <div className="form-group mt-2">
                                                         <input
@@ -48,7 +56,7 @@ const Authentcation = () => {
                                                             id="logpass"
                                                             autoComplete="off"
                                                         />
-                                                        <i className="input-icon uil uil-lock-alt"></i>
+                                                        <MdOutlineLock />
                                                     </div>
                                                     <a
                                                         href="#"
@@ -84,6 +92,7 @@ const Authentcation = () => {
                                                             autoComplete="off"
                                                         />
                                                         {/* icon person */}
+                                                        <FaUser />
                                                     </div>
                                                     <div className="form-group mt-2">
                                                         <input
@@ -95,6 +104,7 @@ const Authentcation = () => {
                                                             autoComplete="off"
                                                         />
                                                         {/* icon email */}
+                                                        <MdOutlineAlternateEmail />
                                                     </div>
                                                     <div className="form-group mt-2">
                                                         <input
@@ -106,6 +116,7 @@ const Authentcation = () => {
                                                             autoComplete="off"
                                                         />
                                                         {/* icon قفل */}
+                                                        <MdOutlineLock />
                                                     </div>
                                                     <a
                                                         href="#"
