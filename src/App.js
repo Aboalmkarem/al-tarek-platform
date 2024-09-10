@@ -30,7 +30,8 @@ function App() {
                         element={<LandingPage />}
                     />
                     {/* landing page end */}
-                    <Route path="/authintcation" element={<Authentication />} />
+                    <Route path="/authentcation/login" element={<Authentication auth={false} />} />
+                    <Route path="/authentcation/signin" element={<Authentication auth={true} />} />
                     <Route path="/course" element={<Course />} />
                 </Routes>
                 <Footer></Footer>

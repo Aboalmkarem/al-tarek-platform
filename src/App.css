@@ -37,56 +37,6 @@ header .left-icons {
 header img {
     max-height: 5rem;
 }
-/* header ul {
-    list-style: none;
-    display: flex;
-    margin: .5rem;
-}
-header ul .li1 {
-    margin: 0 15px; 
-    font-family: "Cairo", sans-serif;
-    color: var(--third-color);
-    align-items: center;
-    background-color: transparent;
-    width: 150px;
-    display: flex;
-    justify-content: center;
-    transition: transform .25s ease-in-out;
-}
-header ul .li1:hover {
-    transform: scale(1.1);
-    box-shadow: 0px 0px 5px var(--third-color);
-    border-radius: 5px;
-}
-
-header ul .li1 a {
-    color: var(--third-color) ;
-    text-decoration: none;
-    font-size: 28px;
-    margin-bottom: 10px;
-}
-
-.li2 {
-    color: rgb(253, 253, 253);
-    align-items: center;
-    background-color: #33beea;
-    border: 2px solid #33beea;
-    font-size: 28px;
-    font-family: "Beiruti", sans-serif;
-    border-radius: 8px;
-    
-    width: 150px;
-    text-align: center;
-}
-.li2:hover {
-    background-color: var(--white-primary);
-    color: #33beea;
-}
-
-header ul .li2 a {
-    text-decoration: none;
-    color: #ffd900;
-} */
 header .right-buttons {
     display: flex;
     flex-wrap: wrap;
