@@ -110,8 +110,9 @@ header .right-buttons {
     height: 50px;
     position: absolute;
     top: 50%;
-    left: 90%;
+    left: 94%;
     animation: rotate 10s infinite linear;
+    
 }
 .atom-3 {
     width: 100px;
@@ -178,7 +179,7 @@ header .right-buttons {
 .main .main-content {
     position: absolute;
     top: 20%;
-    left: 40%;
+    left: 43%;
 }
 .main .main-content h1 {
     font-size: 60px;
@@ -253,6 +254,7 @@ header .right-buttons {
 .card {
     width: 500px;
     height: 300px;
+    
 }
 .card-img {
     width: 100%;
@@ -330,4 +332,135 @@ header .right-buttons {
 .space{
     width: 100%;
     height: 40vh;
+}
+
+
+
+@media  screen and (max-width: 900px){
+    .main .main-content {
+        position: absolute;
+        top: 20%;
+    }
+    .main .main-img {
+        display: none;
+    }
+    .main .main-content h1 {
+        font-size: 30px;
+    }
+    .main .main-content h1 span {
+        font-size: 60px;
+        font-weight: 1000;
+    }
+    .main .main-content h2 {
+        font-size: 40px;
+    }
+   
+    
+    .main .main-content .main-btnm {
+        left: 50px;
+    }
+     /*card */
+
+     .card {
+        width: 300px;
+        height: 100px;
+        
+    }
+    .card-img {
+        width: 100%;
+    }
+    
+    .card-des {
+        
+        width: 225px;
+       
+    }
+    .card-des:hover {
+        transform: scale(0.9);
+    }
+    .card-des h1 {
+        font-size: 19.2px;
+    }
+    
+    .card-des p {
+        font-size: 15px; 
+    }
+    
+
+}
+
+@media  screen and (max-width: 600px){
+    .main .main-content {
+        position: absolute;
+        top: 20%;
+        height: 100vh;
+    }
+    .main .main-img {
+        display: none;
+    }
+    .main .main-content h1 {
+        font-size: 30px;
+        right: 36px;
+        position: relative;
+    }
+    .main .main-content h1 span {
+        font-size: 60px;
+        font-weight: 1000;
+    }
+    .main .main-content h2 {
+        font-size: 30px;
+    }
+
+    .main .main-content .main-btnm {
+        position: absolute;
+        left: 4px;
+        display: flex;
+        
+    }
+   
+    .courses {
+        display: grid;
+        width: 100%;
+        height: 120vh;
+        background-color: #33beea;
+        border-radius: 10px;
+    }
+     /*card */
+
+     .card {
+        width: 300px;
+        height: 100px;
+        margin: 20px;
+        
+    }
+    .card-img {
+        width: 100%;
+    }
+    
+    .card-des {
+        width: 225px;
+       
+    }
+    .card-des:hover {
+        transform: scale(0.9);
+    }
+    .card-des h1 {
+        font-size: 19.2px;
+    }
+    
+    .card-des p {
+        font-size: 15px; 
+    }
+
+
+    .list{
+        height: 150vh;
+    }
+    .list-img {
+        margin: 10px;
+    }
+    .list-img img {
+        width: 1000px;
+    }
+
 }
