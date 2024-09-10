@@ -254,6 +254,7 @@ header .right-buttons {
 .card {
     width: 500px;
     height: 300px;
+    margin-top: 20%;
     
 }
 .card-img {
@@ -391,16 +392,15 @@ header .right-buttons {
 
 @media  screen and (max-width: 600px){
     .main .main-content {
-        position: absolute;
-        top: 20%;
+        position: absolute;   
         height: 100vh;
     }
     .main .main-img {
         display: none;
     }
     .main .main-content h1 {
-        font-size: 30px;
-        right: 36px;
+        font-size: 40px;
+        right: 100px;
         position: relative;
     }
     .main .main-content h1 span {
@@ -409,11 +409,13 @@ header .right-buttons {
     }
     .main .main-content h2 {
         font-size: 30px;
+        position: relative;
+        left: -30px;
     }
 
     .main .main-content .main-btnm {
-        position: absolute;
-        left: 4px;
+        position: relative;
+        left: -100px;
         display: flex;
         
     }
@@ -421,7 +423,7 @@ header .right-buttons {
     .courses {
         display: grid;
         width: 100%;
-        height: 120vh;
+        height: 200vh;
         background-color: #33beea;
         border-radius: 10px;
     }
@@ -430,7 +432,7 @@ header .right-buttons {
      .card {
         width: 300px;
         height: 100px;
-        margin: 20px;
+        margin: 10px;
         
     }
     .card-img {
