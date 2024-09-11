@@ -6,7 +6,7 @@ import Authentication from "./Componants/authentcation";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./Componants/footer";
 import Course from "./Componants/course";
-
+import ScrollToTop from "./Componants/ScrollToTop";
 function App() {
     const preference = window.matchMedia(
         "(prefers-color-scheme: dark)"
@@ -15,6 +15,7 @@ function App() {
     return (
         <div className="app" data-theme={isDark ? "dark" : "light"}>
             <BrowserRouter>
+                <ScrollToTop/>
                 {/* navbar start */}
                 <Navbar
                     isChecked={isDark}
@@ -30,8 +31,14 @@ function App() {
                         element={<LandingPage />}
                     />
                     {/* landing page end */}
-                    <Route path="/authentcation/login" element={<Authentication auth={false} />} />
-                    <Route path="/authentcation/signin" element={<Authentication auth={true} />} />
+                    <Route
+                        path="/authentcation/login"
+                        element={<Authentication auth={false} />}
+                    />
+                    <Route
+                        path="/authentcation/signin"
+                        element={<Authentication auth={true} />}
+                    />
                     <Route path="/course" element={<Course />} />
                 </Routes>
                 <Footer></Footer>
