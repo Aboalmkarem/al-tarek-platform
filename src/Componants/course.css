@@ -14,11 +14,7 @@
     font-weight: 700;
     padding: 8rem 4rem;
     color: var(--span);
-}
-
-.course-file h3 {
-    font-size: 2rem;
-    padding: 3rem 3rem 3rem;
+    text-align: center;
 }
 
 .cards {
@@ -188,32 +184,49 @@
     padding-bottom: 2rem;
 }
 
-@media only screen and (max-width: 895px) {
+@media only screen and (max-width: 900px) {
     .course-file .cards {
-        padding-inline: 4rem;
-        grid-template-columns: repeat(auto-fill, minmax(1rem, 1));
+        grid-template-columns: unset;
     }
     .course-file .card {
-        padding-inline: 1rem;
+        min-width: 31rem;
+        margin-inline: auto;
     }
-    .course-file .card-img {
-        min-width: unset;
+    .course-file .card-content .row1, .course-file .card-content .row2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        padding-bottom: .5rem;
+    }
+    .course-file .card-content .row2 {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: .7rem;
+    }
+    .course-file .card-content .row2 .col2 {
+        align-items: center;
+        gap: .2rem;
+    }
+    .course-file .card-content .col1 h2 {
+        font-size: 1.25rem;
     }
     .course-file .card-content {
-        min-width: unset;
+        min-width: 15rem;
     }
 }
 
-@media only screen and (max-width: 425px) {
+@media only screen and (max-width: 600px) {
     .course-file, .course-file .card-content {
         font-size: .8rem;
     }
     .course-file .cards {
         padding-inline: unset;
-        grid-template-columns: repeat(auto-fill, minmax(1px, 1));
+        grid-template-columns: unset;
     }
     .course-file .card {
-        width: 21rem;
+        max-width: 25rem;
+        min-width: 2rem;
         margin-inline: auto;
     }
     .course-file .card-content .row1, .course-file .card-content .row2 {
@@ -246,5 +259,11 @@
     }
     .course-file h4 {
         font-size: 1.45rem;
+    }
+    .course-file .card-img {
+        min-width: unset;
+    }
+    .course-file .card-content {
+        min-width: 1rem;
     }
 }
