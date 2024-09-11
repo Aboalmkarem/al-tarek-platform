@@ -98,8 +98,7 @@ const Course = () => {
 
     return (
         <div className='course-file'>
-            <h2 className='homeh' id='mainh'>اشتراكاتك</h2>
-            <h3>كورساتي</h3>
+            <h2 className='homeh' id='mainh'>كورسات الفيزياء</h2>
             <div className='cards'>
                 {showCards ? ( 
                     <>
