@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/al-tarek-platform/static/css/main.5cd9edbe.css",
-    "main.js": "/al-tarek-platform/static/js/main.ec9fbce8.js",
+    "main.css": "/al-tarek-platform/static/css/main.637271c3.css",
+    "main.js": "/al-tarek-platform/static/js/main.3872abec.js",
     "static/js/453.2f6a609b.chunk.js": "/al-tarek-platform/static/js/453.2f6a609b.chunk.js",
     "static/media/chem.jpg": "/al-tarek-platform/static/media/chem.3174d06b23f2ff4a96bb.jpg",
     "static/media/Untitled-1.png": "/al-tarek-platform/static/media/Untitled-1.d80b0931021555220161.png",
@@ -10,12 +10,12 @@
     "static/media/—Pngtree—atom icon_8473596.png": "/al-tarek-platform/static/media/—Pngtree—atom icon_8473596.001ecfe0977a8a63854d.png",
     "static/media/logo.png": "/al-tarek-platform/static/media/logo.c7a161bc6354cc6bea16.png",
     "index.html": "/al-tarek-platform/index.html",
-    "main.5cd9edbe.css.map": "/al-tarek-platform/static/css/main.5cd9edbe.css.map",
-    "main.ec9fbce8.js.map": "/al-tarek-platform/static/js/main.ec9fbce8.js.map",
+    "main.637271c3.css.map": "/al-tarek-platform/static/css/main.637271c3.css.map",
+    "main.3872abec.js.map": "/al-tarek-platform/static/js/main.3872abec.js.map",
     "453.2f6a609b.chunk.js.map": "/al-tarek-platform/static/js/453.2f6a609b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5cd9edbe.css",
-    "static/js/main.ec9fbce8.js"
+    "static/css/main.637271c3.css",
+    "static/js/main.3872abec.js"
   ]
 }
