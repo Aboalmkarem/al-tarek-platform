@@ -4,8 +4,64 @@ import { MdOutlineLock, MdOutlineAlternateEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { useRef, useState } from "react";
 
-const Authentcation = ({auth}) => {
-    const authToggle = useRef()
+const Authentcation = ({ auth }) => {
+
+    const [message, setMessage] = useState(null)
+
+    const authentcate = async (event) => {
+        event.preventDefault();
+        setMessage(null)
+        const formData = new FormData(event.target)
+        const jsonData = Object.fromEntries(formData)
+
+        const reqOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(jsonData)
+        }
+
+        const req = await fetch(`${process.env.REACT_APP_NOT_SECRET_CODE}/api/auth/local`, reqOptions)
+        const res = await req.json()
+
+        if (res.error) {
+            setMessage(res.error.message)
+            console.log(res.error.message)
+            return;
+        }
+        if (res.jwt && res.user) {
+            setMessage('successfull registeraiton')
+            console.log('successfull registeraiton')
+            localStorage.setItem('token', res.jwt)
+        }
+    }
+
+    // const register = async (event) => {
+    //     event.preventDefault();
+    //     setMessage(null)
+    //     const formData = new FormData(event.target)
+    //     const jsonData = Object.fromEntries(formData)
+
+    //     const reqOptions = {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify(jsonData)
+    //     }
+
+    //     const req = await fetch('http://localhost:1337/api/auth/local/register', reqOptions)
+    //     const res = await req.json()
+
+    //     if (res.error) {
+    //         setMessage(res.error.message)
+    //         console.log(res.error.message)
+    //         return;
+    //     }
+    //     if (res.jwt && res.user) {
+    //         setMessage('successfull registeraiton')
+    //         console.log('successfull registeraiton')
+    //     }
+    // }
+
+    const authToggle = useRef();
     return (
         <div className="authentcation">
             <div className="section">
@@ -35,35 +91,36 @@ const Authentcation = ({auth}) => {
                                                     <h4 className="mb-4 pb-3">
                                                         Log In
                                                     </h4>
-                                                    <div className="form-group">
+                                                    <form onSubmit={authentcate}>
+                                                        <div className="form-group">
+                                                            <input
+                                                                type="email"
+                                                                name="identifier"
+                                                                className="form-style"
+                                                                placeholder="Your Email"
+                                                                id="registerEmail"
+                                                                autoComplete="off"
+                                                            />
+                                                            {/* icon email */}
+                                                            <MdOutlineAlternateEmail />
+                                                        </div>
+                                                        <div className="form-group mt-2">
+                                                            <input
+                                                                type="password"
+                                                                name="password"
+                                                                className="form-style"
+                                                                placeholder="Your Password"
+                                                                id="registerPassword"
+                                                                autoComplete="off"
+                                                            />
+                                                            <MdOutlineLock />
+                                                        </div>
                                                         <input
-                                                            type="email"
-                                                            name="logemail"
-                                                            className="form-style"
-                                                            placeholder="Your Email"
-                                                            id="logemail"
-                                                            autoComplete="off"
+                                                            type="submit"
+                                                            className="btn mt-4"
                                                         />
-                                                        {/* icon email */}
-                                                        <MdOutlineAlternateEmail />
-                                                    </div>
-                                                    <div className="form-group mt-2">
-                                                        <input
-                                                            type="password"
-                                                            name="logpass"
-                                                            className="form-style"
-                                                            placeholder="Your Password"
-                                                            id="logpass"
-                                                            autoComplete="off"
-                                                        />
-                                                        <MdOutlineLock />
-                                                    </div>
-                                                    <a
-                                                        href="#"
-                                                        className="btn mt-4"
-                                                    >
-                                                        submit
-                                                    </a>
+                                                    </form>
+                                                    <div>{message}</div>
                                                     <p className="mb-0 mt-4 text-center">
                                                         <a
                                                             href="#0"

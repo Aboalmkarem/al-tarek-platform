@@ -5,8 +5,13 @@ import LandingPage from "./Componants/landingPage";
 import Authentication from "./Componants/authentcation";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./Componants/footer";
-import Course from "./Componants/course";
+import Courses from './Componants/courses';
 import ScrollToTop from "./Componants/ScrollToTop";
+import Profile from "./Componants/profile";
+import User from "./Componants/profileFiles/user";
+import FavCourses from "./Componants/profileFiles/favCourses";
+
+
 function App() {
     const preference = window.matchMedia(
         "(prefers-color-scheme: dark)"
@@ -39,7 +44,11 @@ function App() {
                         path="/authentcation/signin"
                         element={<Authentication auth={true} />}
                     />
-                    <Route path="/course" element={<Course />} />
+                    <Route path="/courses" element={<Courses />} />
+                    <Route path='/myProfile/*' element={<Profile></Profile>}>
+                        <Route path='user' element={<User></User>}></Route>
+                        <Route path="favCourses" element={<FavCourses></FavCourses>}></Route>
+                    </Route>
                 </Routes>
                 <Footer></Footer>
             </BrowserRouter>

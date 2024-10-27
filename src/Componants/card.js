@@ -1,4 +1,4 @@
-import './course.css'
+import './courses.css'
 
 function Card(prop) {
 
