@@ -66,7 +66,7 @@ const Courses = () => {
                         })}
                     </>
                 ) : (
-                    <p>error 404</p>
+                    <p>(error card)</p>
                 )}
             </div>
             <hr id="hr2"></hr>

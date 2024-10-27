@@ -1,7 +1,36 @@
 import { Link } from "react-router-dom";
 import logo from "../Assets/logo.png";
+import { useState } from "react";
+import { FaUser } from "react-icons/fa";
+import axios from "axios";
 
 const Navbar = ({ isChecked, handleChange }) => {
+    const [isAutherized, setIsAuthenticated] = useState(
+        localStorage.getItem("token") ? true : false
+    );
+    console.log("isAutherized", isAutherized);
+
+    const [username, setUserName] = useState(null)
+
+    const reqOptions = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
+    }
+
+    axios.get(`${process.env.REACT_APP_NOT_SECRET_CODE}/api/users/me`, reqOptions)
+    .then((res) => {
+        console.log(res.data.username)
+        setUserName(res.data.username)
+    }).catch((err) => {
+        console.log(err)
+        if (err.status === 403) {
+            setIsAuthenticated(false)
+        }
+    })
+
     return (
         <header>
             <div className="left-icons">
@@ -48,16 +77,29 @@ const Navbar = ({ isChecked, handleChange }) => {
                 </label>
             </div>
             <div className="right-buttons">
-                <Link to="/authentcation/login">
-                    <button className="btn btn-ghost btn-xs sm:btn-sm md:btn-md lg:btn-lg">
-                        سجل دخول
-                    </button>
-                </Link>
-                <Link to="/authentcation/signin">
-                    <button className="btn btn-info btn-xs sm:btn-sm md:btn-md lg:btn-lg">
-                        انشئ حساب
-                    </button>
-                </Link>
+                {isAutherized ? (
+                    <>
+                        <Link to="/myProfile/user">
+                            <button className="btn btn-ghost btn-xs sm:btn-sm md:btn-md lg:btn-lg">
+                                <FaUser></FaUser>
+                            </button>
+                            <span>{username}</span>
+                        </Link>
+                    </>
+                ) : (
+                    <>
+                        <Link to="/authentcation/login">
+                            <button className="btn btn-ghost btn-xs sm:btn-sm md:btn-md lg:btn-lg">
+                                سجل دخول
+                            </button>
+                        </Link>
+                        <Link to="/authentcation/signin">
+                            <button className="btn btn-info btn-xs sm:btn-sm md:btn-md lg:btn-lg">
+                                انشئ حساب
+                            </button>
+                        </Link>
+                    </>
+                )}
             </div>
         </header>
     );

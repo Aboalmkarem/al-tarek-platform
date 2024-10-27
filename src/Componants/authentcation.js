@@ -3,63 +3,101 @@ import "./authentcation.css";
 import { MdOutlineLock, MdOutlineAlternateEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router";
+import { render } from "@testing-library/react";
 
 const Authentcation = ({ auth }) => {
+    const [message, setMessage] = useState(null);
+    const [isAutherized, setIsAuthenticated] = useState(
+        localStorage.getItem("token") ? true : false
+    );
+    console.log("isAutherized", isAutherized);
 
-    const [message, setMessage] = useState(null)
+    const navigate = useNavigate();
 
-    const authentcate = async (event) => {
+    const login = async (event) => {
+        if(isAutherized) {
+            setMessage("You are already logged in")
+            setTimeout(() => {
+                navigate("/al-tarek-platform");
+                window.location.reload()
+                return;
+            },500)
+        }
         event.preventDefault();
-        setMessage(null)
-        const formData = new FormData(event.target)
-        const jsonData = Object.fromEntries(formData)
+        setMessage(null);
+        const formData = new FormData(event.target);
+        const jsonData = Object.fromEntries(formData);
 
         const reqOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(jsonData)
-        }
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(jsonData),
+        };
 
-        const req = await fetch(`${process.env.REACT_APP_NOT_SECRET_CODE}/api/auth/local`, reqOptions)
-        const res = await req.json()
+        const req = await fetch(
+            `${process.env.REACT_APP_NOT_SECRET_CODE}/api/auth/local`,
+            reqOptions
+        );
+        const res = await req.json();
 
         if (res.error) {
-            setMessage(res.error.message)
-            console.log(res.error.message)
+            setMessage(res.error.message);
+            console.log(res.error.message);
             return;
         }
         if (res.jwt && res.user) {
-            setMessage('successfull registeraiton')
-            console.log('successfull registeraiton')
-            localStorage.setItem('token', res.jwt)
+            setMessage("successfull registeraiton");
+            console.log("successfull registeraiton");
+            localStorage.setItem("token", res.jwt);
+            setTimeout(() => {
+                navigate("/al-tarek-platform");
+                window.location.reload()
+            },500)
         }
-    }
+    };
 
-    // const register = async (event) => {
-    //     event.preventDefault();
-    //     setMessage(null)
-    //     const formData = new FormData(event.target)
-    //     const jsonData = Object.fromEntries(formData)
+    const register = async (event) => {
+        event.preventDefault();
+        setMessage(null);
+        const formData = new FormData(event.target);
+        const jsonData = Object.fromEntries(formData);
 
-    //     const reqOptions = {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify(jsonData)
-    //     }
+        const reqOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")||null}`,
+            },
+            body: JSON.stringify(jsonData),
+        };
 
-    //     const req = await fetch('http://localhost:1337/api/auth/local/register', reqOptions)
-    //     const res = await req.json()
+        const req = await fetch(
+            "http://localhost:1337/api/auth/local/register",
+            reqOptions
+        );
+        const res = await req.json();
 
-    //     if (res.error) {
-    //         setMessage(res.error.message)
-    //         console.log(res.error.message)
-    //         return;
-    //     }
-    //     if (res.jwt && res.user) {
-    //         setMessage('successfull registeraiton')
-    //         console.log('successfull registeraiton')
-    //     }
-    // }
+        if (res.error) {
+            setMessage(res.error.message);
+            console.log(res.error.message);
+            if (isAutherized) {setMessage('You are already logged in') 
+            setTimeout(() => {
+                navigate("/al-tarek-platform")
+                window.location.reload()
+            },500)}
+            return
+        }
+        
+        if (res.jwt && res.user) {
+            setMessage("successfull registeraiton");
+            console.log("successfull registeraiton");
+            localStorage.setItem("token", res.jwt);
+            setTimeout(() => {
+                navigate("/al-tarek-platform");
+                window.location.reload()
+            },500)
+        }
+    };
 
     const authToggle = useRef();
     return (
@@ -91,7 +129,7 @@ const Authentcation = ({ auth }) => {
                                                     <h4 className="mb-4 pb-3">
                                                         Log In
                                                     </h4>
-                                                    <form onSubmit={authentcate}>
+                                                    <form onSubmit={login}>
                                                         <div className="form-group">
                                                             <input
                                                                 type="email"
@@ -139,48 +177,48 @@ const Authentcation = ({ auth }) => {
                                                     <h4 className="mb-4 pb-3">
                                                         Sign Up
                                                     </h4>
-                                                    <div className="form-group">
+                                                    <form onSubmit={register}>
+                                                        <div className="form-group">
+                                                            <input
+                                                                type="text"
+                                                                name="username"
+                                                                className="form-style"
+                                                                placeholder="Your Full Name"
+                                                                id="logname"
+                                                                autoComplete="off"
+                                                            />
+                                                            {/* icon person */}
+                                                            <FaUser />
+                                                        </div>
+                                                        <div className="form-group mt-2">
+                                                            <input
+                                                                type="email"
+                                                                name="email"
+                                                                className="form-style"
+                                                                placeholder="Your Email"
+                                                                id="logemail"
+                                                                autoComplete="off"
+                                                            />
+                                                            {/* icon email */}
+                                                            <MdOutlineAlternateEmail />
+                                                        </div>
+                                                        <div className="form-group mt-2">
+                                                            <input
+                                                                type="password"
+                                                                name="password"
+                                                                className="form-style"
+                                                                placeholder="Your Password"
+                                                                id="logpass"
+                                                                autoComplete="off"
+                                                            />
+                                                            {/* icon قفل */}
+                                                            <MdOutlineLock />
+                                                        </div>
                                                         <input
-                                                            type="text"
-                                                            name="logname"
-                                                            className="form-style"
-                                                            placeholder="Your Full Name"
-                                                            id="logname"
-                                                            autoComplete="off"
+                                                            type="submit"
+                                                            className="btn mt-4"
                                                         />
-                                                        {/* icon person */}
-                                                        <FaUser />
-                                                    </div>
-                                                    <div className="form-group mt-2">
-                                                        <input
-                                                            type="email"
-                                                            name="logemail"
-                                                            className="form-style"
-                                                            placeholder="Your Email"
-                                                            id="logemail"
-                                                            autoComplete="off"
-                                                        />
-                                                        {/* icon email */}
-                                                        <MdOutlineAlternateEmail />
-                                                    </div>
-                                                    <div className="form-group mt-2">
-                                                        <input
-                                                            type="password"
-                                                            name="logpass"
-                                                            className="form-style"
-                                                            placeholder="Your Password"
-                                                            id="logpass"
-                                                            autoComplete="off"
-                                                        />
-                                                        {/* icon قفل */}
-                                                        <MdOutlineLock />
-                                                    </div>
-                                                    <a
-                                                        href="#"
-                                                        className="btn mt-4"
-                                                    >
-                                                        submit
-                                                    </a>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
