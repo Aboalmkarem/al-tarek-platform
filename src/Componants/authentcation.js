@@ -58,6 +58,14 @@ const Authentcation = ({ auth }) => {
     };
 
     const register = async (event) => {
+        if(isAutherized) {
+            setMessage("You are already logged in")
+            setTimeout(() => {
+                navigate("/al-tarek-platform");
+                window.location.reload()
+                return;
+            },500)
+        }
         event.preventDefault();
         setMessage(null);
         const formData = new FormData(event.target);
@@ -65,9 +73,7 @@ const Authentcation = ({ auth }) => {
 
         const reqOptions = {
             method: "POST",
-            headers: { "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")||null}`,
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(jsonData),
         };
 
