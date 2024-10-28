@@ -4,15 +4,10 @@ import Card from "./card";
 import {useState } from "react";
 import axios from "axios";
 
-const Courses = () => {
-    // let showBtn = useRef();
-    // let subjects = useRef();
-    // let isShowMore = false;
+const Courses = ({category}) => {
+    
     const [showCards, setShowCards] = useState(false);
     const [courses, setCourses] = useState(null);
-
-    // setMessage(null);
-
     const reqOptions = {
         method: "GET",
         headers: {
@@ -22,15 +17,16 @@ const Courses = () => {
     };
 
     async function getCourses() {
+        // console.log(category)
         axios
             .get(
-                `${process.env.REACT_APP_NOT_SECRET_CODE}/api/courses?populate=*`,
+                `${process.env.REACT_APP_NOT_SECRET_CODE}/api/courses?populate=*&filters[category][$eq]=${category}`,
                 reqOptions
             )
             .then((res) => {
                 // handle success
-                // console.log(res.data.data);
                 setCourses(res.data.data);
+                // console.log(res)
                 setShowCards(true);
             })
             .catch((error) => {
@@ -44,7 +40,7 @@ const Courses = () => {
     return (
         <div className="course-file">
             <h2 className="homeh" id="mainh">
-                كورسات الفيزياء
+                {category}
             </h2>
             <div className="cards">
                 {showCards ? (

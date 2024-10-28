@@ -5,7 +5,7 @@ import { FaUser } from "react-icons/fa";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
-const Authentcation = ({ auth }) => {
+const Authentcation = ({ authToggle }) => {
     const [message, setMessage] = useState(null);
     const [isAutherized, setIsAuthenticated] = useState(
         localStorage.getItem("token") ? true : false
@@ -14,14 +14,18 @@ const Authentcation = ({ auth }) => {
 
     const navigate = useNavigate();
 
-    const login = async (event) => {
+    function toLandingPage() {
+        setTimeout(() => {
+            navigate("/al-tarek-platform");
+            window.location.reload()
+            return;
+        },500)
+    }
+    
+    async function authorizate(endPoint,event) {
         if(isAutherized) {
             setMessage("You are already logged in")
-            setTimeout(() => {
-                navigate("/al-tarek-platform");
-                window.location.reload()
-                return;
-            },500)
+            toLandingPage()
         }
         event.preventDefault();
         setMessage(null);
@@ -35,7 +39,7 @@ const Authentcation = ({ auth }) => {
         };
 
         const req = await fetch(
-            `${process.env.REACT_APP_NOT_SECRET_CODE}/api/auth/local`,
+            `${process.env.REACT_APP_NOT_SECRET_CODE}/api/auth/${endPoint}`,
             reqOptions
         );
         const res = await req.json();
@@ -49,62 +53,11 @@ const Authentcation = ({ auth }) => {
             setMessage("successfull registeraiton");
             console.log("successfull registeraiton");
             localStorage.setItem("token", res.jwt);
-            setTimeout(() => {
-                navigate("/al-tarek-platform");
-                window.location.reload()
-            },500)
+            toLandingPage()
         }
     };
 
-    const register = async (event) => {
-        if(isAutherized) {
-            setMessage("You are already logged in")
-            setTimeout(() => {
-                navigate("/al-tarek-platform");
-                window.location.reload()
-                return;
-            },500)
-        }
-        event.preventDefault();
-        setMessage(null);
-        const formData = new FormData(event.target);
-        const jsonData = Object.fromEntries(formData);
-
-        const reqOptions = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(jsonData),
-        };
-
-        const req = await fetch(
-            "http://localhost:1337/api/auth/local/register",
-            reqOptions
-        );
-        const res = await req.json();
-
-        if (res.error) {
-            setMessage(res.error.message);
-            console.log(res.error.message);
-            if (isAutherized) {setMessage('You are already logged in') 
-            setTimeout(() => {
-                navigate("/al-tarek-platform")
-                window.location.reload()
-            },500)}
-            return
-        }
-        
-        if (res.jwt && res.user) {
-            setMessage("successfull registeraiton");
-            console.log("successfull registeraiton");
-            localStorage.setItem("token", res.jwt);
-            setTimeout(() => {
-                navigate("/al-tarek-platform");
-                window.location.reload()
-            },500)
-        }
-    };
-
-    const authToggle = useRef();
+    const authToggleRef = useRef();
     return (
         <div className="authentcation">
             <div className="section">
@@ -117,13 +70,13 @@ const Authentcation = ({ auth }) => {
                                     <span>Sign Up</span>
                                 </h6>
                                 <input
-                                    ref={authToggle}
+                                    ref={authToggleRef}
                                     className="checkbox"
                                     type="checkbox"
                                     id="reg-log"
                                     name="reg-log"
-                                    checked={auth}
-                                    // onClick={() => { authToggle.current.checked = false }}
+                                    checked={authToggle}
+                                    disabled={true}
                                 />
                                 <label htmlFor="reg-log"></label>
                                 <div className="card-3d-wrap mx-auto">
@@ -134,7 +87,7 @@ const Authentcation = ({ auth }) => {
                                                     <h4 className="mb-4 pb-3">
                                                         Log In
                                                     </h4>
-                                                    <form onSubmit={login}>
+                                                    <form onSubmit={(e) => {authorizate('local', e)}}>
                                                         <div className="form-group">
                                                             <input
                                                                 type="email"
@@ -182,7 +135,7 @@ const Authentcation = ({ auth }) => {
                                                     <h4 className="mb-4 pb-3">
                                                         Sign Up
                                                     </h4>
-                                                    <form onSubmit={register}>
+                                                    <form onSubmit={(e) => {authorizate('local/register', e)}}>
                                                         <div className="form-group">
                                                             <input
                                                                 type="text"
