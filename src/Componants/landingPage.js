@@ -44,7 +44,7 @@ const LandingPage = () => {
             </div>
             {/* ======== courses start ========== */}
             <div className="courses">
-                <Link className="card" to='/course'>
+                <Link className="card" to='/courses/Chemistry'>
                     <div className="card-img">
                         <img src={chemImage} alt="Course Image 1" />
                     </div>
@@ -54,7 +54,7 @@ const LandingPage = () => {
                     </div>
                 </Link>
 
-                <Link className="card" to='/course'>
+                <Link className="card" to='/courses/Physics'>
                     <div className="card-img">
                         <img src={phyImage} alt="Course Image-2 " />
                     </div>

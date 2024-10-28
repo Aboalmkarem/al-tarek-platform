@@ -59,6 +59,15 @@
     --hover: #1F2937;
     --backgroundA: linear-gradient(#1d232a98, #1D232A);
 } */
+
+/* .landing-page {
+    width: 100vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-wrap: wrap;
+} */
 header {
     background-color: var(--white-primary);
     height: 5rem;
