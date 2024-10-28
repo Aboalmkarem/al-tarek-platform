@@ -4,7 +4,6 @@ import { MdOutlineLock, MdOutlineAlternateEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
-import { render } from "@testing-library/react";
 
 const Authentcation = ({ auth }) => {
     const [message, setMessage] = useState(null);
