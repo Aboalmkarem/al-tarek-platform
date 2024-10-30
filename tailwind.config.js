@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      content: {
+        'link': 'url("/icons/link.svg")',
+      },
+    }
   },
   plugins: [require('daisyui')],
   daisyui: {
