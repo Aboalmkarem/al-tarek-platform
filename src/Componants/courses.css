@@ -1,4 +1,4 @@
-.course-file {
+.courses-file {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -9,7 +9,7 @@
     transition: background .15s;
 }
 
-.course-file .homeh {
+.courses-file .homeh {
     font-size: 3rem;
     font-weight: 700;
     padding: 8rem 4rem;
@@ -17,7 +17,7 @@
     text-align: center;
 }
 
-.cards {
+.courses-file .cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
     gap: 2rem;
@@ -26,21 +26,21 @@
     min-height: 90vh;
 } 
 
-.card {
+.courses-file .card {
     min-height: 40rem;
 }
 
-.card-img {
+.courses-file .card-img {
     display: flex;
     overflow: hidden;
     border-radius: .7rem;
 }
 
-.card-img img {
+.courses-file .card-img img {
     min-width: 7rem;
 }
 
-.card-content {
+.courses-file .card-content {
     display: flex;
     min-width: 20rem;
     min-height: max-content;
@@ -57,41 +57,41 @@
     /* text-wrap: balance; */
 }
 
-.card-content h2 {
+.courses-file .card-content h2 {
     padding: 0;
     font-size: 1.4rem;
     color: var(--text);
 }
 
-.card-content .row1 {
+.courses-file .card-content .row1 {
     display: flex;
 }
 
-.card-content .col1 {
+.courses-file .card-content .col1 {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
-.card-content .col1 h2 {
+.courses-file .card-content .col1 h2 {
     padding: .2rem .2rem 1rem;
 }
 
-.card-content .col1 hr {
+.courses-file .card-content .col1 hr {
     border: 1px solid var(--span);
 }
 
-.card-content .col1 div {
+.courses-file .card-content .col1 div {
     padding: .7rem 0 1.7rem;
 }
 
-.card-content #hr1 {
+.courses-file .card-content #hr1 {
     margin-inline: 2.7rem;
     padding-bottom: .7rem;
     border-top: .1px solid #56585c69;
 }
 
-.card-content .isSubscribed {
+.courses-file .card-content .isSubscribed {
     display: flex;
     flex-grow: 0;
     justify-content: center;
@@ -99,7 +99,7 @@
     padding-right: .8rem;
 }
 
-.card-content .isSubscribed button {
+.courses-file .card-content .isSubscribed button {
     pointer-events: none;
     width: 7.5rem;
     height: 4.5rem;
@@ -109,12 +109,12 @@
     background-color: #2fcbff2d;
 }
 
-.card-content .row2 {
+.courses-file .card-content .row2 {
     display: flex;
     align-items: center;
 }
 
-.card-content .row2 button {
+.courses-file .card-content .row2 button {
     width: 7.5rem;
     height: 2rem;
     font-size: .9rem;
@@ -125,20 +125,20 @@
     transition: background .15s;
 }
 
-.card-content .row2 button:hover {
+.courses-file .card-content .row2 button:hover {
     background-color: transparent;
     color: var(--span);
 }
 
 
-.card-content .col2 {
+.courses-file .card-content .col2 {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: end;
 }
 
-.course-file #hr2 {
+.courses-file #hr2 {
     width: 80%;
     border: .35rem solid var(--span);
     border-radius: .375rem;
@@ -147,7 +147,7 @@
     opacity: .3;
 }
 
-.course-file .to-account {
+.courses-file .to-account {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -155,7 +155,7 @@
     gap: .5rem;
 }
 
-.course-file .to-account button {
+.courses-file .to-account button {
     width: 12.5rem;
     height: 6.5rem;
     border-radius: .4rem;
@@ -165,12 +165,12 @@
     transition: background .15s;
 }
 
-.course-file .to-account button:hover {
+.courses-file .to-account button:hover {
     background-color: var(--span);
     color: #fff;
 }
 
-.course-file h1 {
+.courses-file h1 {
     font-size: 3.5rem;
     padding: 4rem 0 8rem;
     font-weight: 700;
@@ -178,92 +178,92 @@
     color: var(--span);
 }
 
-.course-file h4 {
+.courses-file h4 {
     font-size: 2rem;
     text-align: center;
     padding-bottom: 2rem;
 }
 
 @media only screen and (max-width: 900px) {
-    .course-file .cards {
+    .courses-file .cards {
         grid-template-columns: unset;
     }
-    .course-file .card {
+    .courses-file .card {
         min-width: 31rem;
         margin-inline: auto;
     }
-    .course-file .card-content .row1, .course-file .card-content .row2 {
+    .courses-file .card-content .row1, .courses-file .card-content .row2 {
         display: flex;
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
         padding-bottom: .5rem;
     }
-    .course-file .card-content .row2 {
+    .courses-file .card-content .row2 {
         flex-direction: column-reverse;
         text-align: center;
         gap: .7rem;
     }
-    .course-file .card-content .row2 .col2 {
+    .courses-file .card-content .row2 .col2 {
         align-items: center;
         gap: .2rem;
     }
-    .course-file .card-content .col1 h2 {
+    .courses-file .card-content .col1 h2 {
         font-size: 1.25rem;
     }
-    .course-file .card-content {
+    .courses-file .card-content {
         min-width: 15rem;
     }
 }
 
 @media only screen and (max-width: 600px) {
-    .course-file, .course-file .card-content {
+    .courses-file, .courses-file .card-content {
         font-size: .8rem;
     }
-    .course-file .cards {
+    .courses-file .cards {
         padding-inline: unset;
         grid-template-columns: unset;
     }
-    .course-file .card {
+    .courses-file .card {
         max-width: 25rem;
         min-width: 2rem;
         margin-inline: auto;
     }
-    .course-file .card-content .row1, .course-file .card-content .row2 {
+    .courses-file .card-content .row1, .courses-file .card-content .row2 {
         display: flex;
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
         padding-bottom: .5rem;
     }
-    .course-file .card-content .row2 {
+    .courses-file .card-content .row2 {
         flex-direction: column-reverse;
         text-align: center;
         gap: .7rem;
     }
-    .course-file .card-content .row2 .col2 {
+    .courses-file .card-content .row2 .col2 {
         align-items: center;
         gap: .2rem;
     }
-    .course-file .card-content .col1 h2 {
+    .courses-file .card-content .col1 h2 {
         font-size: 1.25rem;
     }
-    .course-file .card-content .isSubscribed {
+    .courses-file .card-content .isSubscribed {
         padding: unset;
     }
-    .course-file #mainh {
+    .courses-file #mainh {
         font-size: 2.5rem;
     }
-    .course-file h3  {
+    .courses-file h3  {
         font-size: 1.6rem;
     }
-    .course-file h4 {
+    .courses-file h4 {
         font-size: 1.45rem;
     }
-    .course-file .card-img {
+    .courses-file .card-img {
         min-width: unset;
     }
-    .course-file .card-content {
+    .courses-file .card-content {
         min-width: 1rem;
     }
 }

@@ -25,11 +25,9 @@ const LandingPage = () => {
                         أول منصه تعليمية باستعمال <span>الذكاء الاصطناعي</span>
                     </h2>
 
-                    <div className="main-btnm">
-                        <a className="btnm" href="#cs">
+                    <Link className="main-btnm">
                             يلا بينا <span> نتعلم</span>
-                        </a>
-                    </div>
+                    </Link>
                 </div>
             </div>
             {/* ======== list start ========== */}
