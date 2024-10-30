@@ -38,7 +38,7 @@ const Courses = ({category}) => {
     getCourses()
 
     return (
-        <div className="course-file">
+        <div className="courses-file">
             <h2 className="homeh" id="mainh">
                 {category}
             </h2>

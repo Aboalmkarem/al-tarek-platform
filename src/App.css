@@ -231,7 +231,7 @@ header .right-buttons {
     border-radius: 10px;
     background-color: #33beea;
 }
-.card {
+.courses .card {
     width: 33rem;
     height: 15rem;
     display: flex;
@@ -240,10 +240,10 @@ header .right-buttons {
     justify-content: center;
     align-items: center;
 }
-.card-img {
+.courses .card-img {
     width: 100%;
 }
-.card-des {
+.courses .card-des {
     background-color: var(--white-primary);
     width: 370px;
     margin-top: -1rem;
@@ -252,23 +252,23 @@ header .right-buttons {
     border: 3px solid #33beea;
     transition: transform 0.15s ease-in-out;
 }
-.card-des:hover {
+.courses .card-des:hover {
     transform: scale(0.9);
 }
-.card-des h1 {
+.courses .card-des h1 {
     color: var(--third-color);
     font-size: 32px;
     font-weight: 800;
     left: 30px;
     font-family: "Cairo", sans-serif;
 }
-.card-des p {
+.courses .card-des p {
     color: aqua;
     font-size: 25px;
     margin-top: 4px;
     font-family: "Beiruti", sans-serif;
 }
-.card-des p span {
+.courses .card-des p span {
     color: var(--color-secondary);
     font-family: "Cairo", sans-serif;
 }
