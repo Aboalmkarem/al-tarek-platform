@@ -3,25 +3,17 @@ import "./authentcation.css";
 import { MdOutlineLock, MdOutlineAlternateEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { useRef, useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router";
-import axios, { Axios } from "axios";
+import { toLandingPage } from "./handler";
 
 const Authentcation = ({ authToggle }) => {
+    const navigate = useNavigate();
     const [message, setMessage] = useState(null);
     const [isAutherized, setIsAuthenticated] = useState(
         localStorage.getItem("token") ? true : false
     );
     console.log("isAutherized", isAutherized);
-
-    const navigate = useNavigate();
-
-    function toLandingPage() {
-        setTimeout(() => {
-            navigate("/al-tarek-platform");
-            window.location.reload();
-            return;
-        }, 500);
-    }
 
     async function makeRequest(endPoint, reqBody) {
         axios
@@ -40,7 +32,7 @@ const Authentcation = ({ authToggle }) => {
                     setMessage('successfull registration')
                     localStorage.setItem("token", res.data.jwt);
                     setIsAuthenticated(true);
-                    toLandingPage()
+                    toLandingPage(navigate)
                 } else {
                     setMessage('error')
                 }
@@ -58,7 +50,7 @@ const Authentcation = ({ authToggle }) => {
     async function authorizate(endPoint, event) {
         if (isAutherized) {
             setMessage("You already logged in");
-            toLandingPage();
+            toLandingPage(navigate);
         }
         event.preventDefault();
         setMessage(null);
