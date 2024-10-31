@@ -24,30 +24,30 @@ const Navbar = ({ isChecked, handleChange }) => {
 
     async function accessUser() {
         await axios
-        .get(
-            `${process.env.REACT_APP_NOT_SECRET_CODE}/api/users/me`,
-            reqOptions
-        )
-        .then((res) => {
-            console.log(res.data.username);
-            setUserName(res.data.username);
-        })
-        .catch((err) => {
-            console.log(err);
-            if (err.status === 403 || err.status === 401) {
-                setIsAuthenticated(false);
-            }
-        });
+            .get(
+                `${process.env.REACT_APP_NOT_SECRET_CODE}/api/users/me`,
+                reqOptions
+            )
+            .then((res) => {
+                console.log(res.data.username);
+                setUserName(res.data.username);
+            })
+            .catch((err) => {
+                console.log(err);
+                if (err.status === 403 || err.status === 401) {
+                    setIsAuthenticated(false);
+                }
+            });
     }
 
     function signOut() {
         localStorage.removeItem("token");
-        console.log("Signing out")
-        window.location.reload()
+        console.log("Signing out");
+        window.location.reload();
     }
 
     useEffect(() => {
-        accessUser()
+        accessUser();
         if (isAutherized) {
             let handle = (e) => {
                 if (!drop.current.contains(e.target)) {
@@ -106,12 +106,14 @@ const Navbar = ({ isChecked, handleChange }) => {
             <div className="right-buttons">
                 {isAutherized ? (
                     <>
-                        <FaUser
-                            className="pointer"
+                        <button
+                            className="btn btn-ghost btn-xs sm:btn-sm md:btn-md lg:btn-lg"
                             onClick={() => {
                                 setOpen(!open);
                             }}
-                        ></FaUser>
+                        >
+                            <FaUser></FaUser>
+                        </button>
                         <div
                             className={`user-dropMenu ${open ? "active" : ""}`}
                             ref={drop}
