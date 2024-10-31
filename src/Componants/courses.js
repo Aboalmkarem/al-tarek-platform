@@ -26,11 +26,9 @@ const Courses = ({ category }) => {
                 // console.log(res.data.data)
                 if (res.data.data.length === 0) {
                     setShowCards(true);
-                    return;
                 } else {
                     setCourses(res.data.data);
                     setShowCards(true);
-                    return;
                 }
             })
             .catch((error) => {
@@ -42,12 +40,10 @@ const Courses = ({ category }) => {
                 ) {
                     setErr("you must be logged in. please login first");
                     setShowErrors(true);
-                    return;
                 }
                 if (error.response?.status === undefined) {
                     setErr(`${error.message}. please try again later`);
                     setShowErrors(true);
-                    return;
                 }
             });
     }

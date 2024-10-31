@@ -75,6 +75,71 @@ header .right-buttons {
     align-items: center;
     gap: 0.5rem;
 }
+.nav .user-dropMenu, .notifications {
+    position: absolute;
+    top: 5rem;
+    left: 1rem;
+    border-radius: .4rem;
+    font-size: 1rem;
+    width: 13rem;
+    height: 0;
+    overflow: hidden;
+    transition: height .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background-color: var(--lightBack);
+}
+
+.nav .notifications {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 2.2rem;
+}
+
+.nav .user-dropMenu ul {
+    display: flex;
+    flex-direction: column;
+    padding-block: 1rem;
+    gap: .5rem;
+}
+
+.nav .user-dropMenu li {
+    width: 100%;
+    padding: .4rem ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background .15s;
+}
+
+.nav .user-dropMenu li:hover {
+    background-color: var(--hover);
+}
+
+.nav .user-dropMenu hr {
+    width: 70%;
+    margin: auto;
+    border-top: 1px solid var(--span);
+    opacity: .4;
+}
+
+.nav .user-dropMenu p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .3rem .7rem;
+}
+
+.nav .user-dropMenu.active {
+    height: 27.02rem;
+}
+
+.nav .notifications.active {
+    height: 2.5rem;
+}
+
+.pointer {
+    cursor: pointer;
+}
 
 /*main*/
 .main {
