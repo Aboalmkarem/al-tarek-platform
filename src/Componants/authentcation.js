@@ -151,111 +151,65 @@ const Authentcation = ({ authToggle }) => {
                                             </div>
                                         </div>
                                         <div className="card-back">
-                                            <div className="center-wrap">
-                                                <div className="section text-center">
-                                                    <h4 className="mb-4 pb-3">
-                                                        Sign Up
-                                                    </h4>
-                                                    <div className="form-group">
-                                                        <input
-                                                            type="text"
-                                                            name="logname"
-                                                            className="form-style"
-                                                            placeholder="Your Full Name"
-                                                            id="logname"
-                                                            autoComplete="off"
-                                                        />
-                                                        {/* icon person */}
-                                                        <FaUser />
-                                                    </div>
-                                                    <div className="form-group mt-2">
-                                                        <input
-                                                            type="email"
-                                                            name="logemail"
-                                                            className="form-style"
-                                                            placeholder="Your Email"
-                                                            id="logemail"
-                                                            autoComplete="off"
-                                                        />
-                                                        {/* icon email */}
-                                                        <MdOutlineAlternateEmail />
-                                                    </div>
-                                                    <div className="form-group mt-2">
-                                                        <input
-                                                            type="password"
-                                                            name="logpass"
-                                                            className="form-style"
-                                                            placeholder="Your Password"
-                                                            id="logpass"
-                                                            autoComplete="off"
-                                                        />
-                                                        {/* icon قفل */}
-                                                        <MdOutlineLock />
-                                                    </div>
-                                                    <div className="form-group mt-2">
-                                                        <input
-                                                            type="password"
-                                                            name="logpass"
-                                                            className="form-style"
-                                                            placeholder="Confirm Your Password"
-                                                            id="logpass"
-                                                            autoComplete="off"
-                                                        />
-                                                        {/* icon قفل */}
-                                                        <MdOutlineLock />
-                                                    </div>
-                                                    <a
-                                                        href="#"
-                                                        className="btn mt-4"
-                                                    >
-                                                        <div className="form-group">
-                                                            <input
-                                                                type="text"
-                                                                name="username"
-                                                                className="form-style"
-                                                                placeholder="Your Full Name"
-                                                                id="logname"
-                                                                autoComplete="off"
-                                                                required={true}
-                                                            />
-                                                            {/* icon person */}
-                                                            <FaUser />
-                                                        </div>
-                                                        <div className="form-group mt-2">
-                                                            <input
-                                                                type="email"
-                                                                name="email"
-                                                                className="form-style"
-                                                                placeholder="Your Email"
-                                                                id="logemail"
-                                                                autoComplete="off"
-                                                                required={true}
-                                                            />
-                                                            {/* icon email */}
-                                                            <MdOutlineAlternateEmail />
-                                                        </div>
-                                                        <div className="form-group mt-2">
-                                                            <input
-                                                                type="password"
-                                                                name="password"
-                                                                className="form-style"
-                                                                placeholder="Your Password"
-                                                                id="logpass"
-                                                                autoComplete="off"
-                                                                required={true}
-                                                            />
-                                                            {/* icon قفل */}
-                                                            <MdOutlineLock />
-                                                        </div>
-                                                        <input
-                                                            type="submit"
-                                                            className="btn mt-4"
-                                                        />
-                                                        <div>{message}</div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
+    <div className="center-wrap">
+        <div className="section text-center">
+            <h4 className="mb-4 pb-3">Sign Up</h4>
+            <form onSubmit={(e) => authorizate("register", e)}>
+                <div className="form-group">
+                    <input
+                        type="text"
+                        name="logname"
+                        className="form-style"
+                        placeholder="Your Full Name"
+                        id="logname"
+                        autoComplete="off"
+                        required={true}
+                    />
+                    <FaUser />
+                </div>
+                <div className="form-group mt-2">
+                    <input
+                        type="email"
+                        name="logemail"
+                        className="form-style"
+                        placeholder="Your Email"
+                        id="logemail"
+                        autoComplete="off"
+                        required={true}
+                    />
+                    <MdOutlineAlternateEmail />
+                </div>
+                <div className="form-group mt-2">
+                    <input
+                        type="password"
+                        name="logpass"
+                        className="form-style"
+                        placeholder="Your Password"
+                        id="logpass"
+                        autoComplete="off"
+                        required={true}
+                    />
+                    <MdOutlineLock />
+                </div>
+                <div className="form-group mt-2">
+                    <input
+                        type="password"
+                        name="confirmPassword"
+                        className="form-style"
+                        placeholder="Confirm Your Password"
+                        id="confirmPassword"
+                        autoComplete="off"
+                        required={true}
+                    />
+                    <MdOutlineLock />
+                </div>
+                <input type="submit" className="btn mt-4" value="Sign Up" />
+            </form>
+            <div>{message}</div>
+        </div>
+    </div>
+</div>
+
                                     </div>
                                 </div>
                             </div>
