@@ -1,6 +1,9 @@
+import { Link } from 'react-router-dom'
 import './courses.css'
 
 function Card(prop) {
+
+    console.log(prop.link)
 
     return(
         <div className={prop.class} id={prop.id} key={prop.key}>
@@ -18,7 +21,9 @@ function Card(prop) {
                 </div>
                 <hr id="hr1"></hr>
                 <div className="row2">
-                    <button>الدخول للكورس</button>
+                    <Link to={`./${prop.link}`}>
+                        <button>الدخول للكورس</button>
+                    </Link>
                     <div className="col2">
                         <p>{prop.editDate}</p>
                         <p>{prop.publishDate}</p>

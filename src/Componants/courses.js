@@ -69,6 +69,7 @@ const Courses = ({ category }) => {
                                         <Card
                                             key={course.id}
                                             id={course.id}
+                                            link={course.id}
                                             img={`${process.env.REACT_APP_NOT_SECRET_CODE}${course.attributes.courseCoverIMG.data.attributes.url}`}
                                             class="card"
                                             name={course.attributes.title}

@@ -12,7 +12,7 @@ const LandingPage = () => {
                 <img className="atom" src={atom} alt="Atom Icon" />
 
                 <div className="main-img">
-                    <img src={background} alt="Main Image" />
+                    <img src={background} alt="img" />
                 </div>
 
                 <img className="atom-2" src={atom} alt="Atom Icon" />
@@ -25,9 +25,9 @@ const LandingPage = () => {
                         أول منصه تعليمية باستعمال <span>الذكاء الاصطناعي</span>
                     </h2>
 
-                    <Link className="main-btnm">
-                            يلا بينا <span> نتعلم</span>
-                    </Link>
+                    <a className="main-btnm" href="#courses">
+                        يلا بينا <span> نتعلم</span>
+                    </a>
                 </div>
             </div>
             {/* ======== list start ========== */}
@@ -36,29 +36,33 @@ const LandingPage = () => {
                     <img src={icon} alt="Chemistry Sticker" />
                 </div>
                 <div className="list-text">
-                    هنشرحلك منهج <span>  الفزياء و الكيمياء</span> للصف الثاني الثانوي بكل
-                    بساطه وسهوله
+                    هنشرحلك منهج <span> الفزياء و الكيمياء</span> للصف الثاني
+                    الثانوي بكل بساطه وسهوله
                 </div>
             </div>
             {/* ======== courses start ========== */}
-            <div className="courses">
-                <Link className="card" to='/courses/Chemistry'>
+            <div className="courses" id="courses">
+                <Link className="card" to="/courses/Chemistry">
                     <div className="card-img">
-                        <img src={chemImage} alt="Course Image 1" />
+                        <img src={chemImage} alt="img" />
                     </div>
                     <div className="card-des">
                         <h1>الصف الثاني الثانوي</h1>
-                        <p>شرح منهج <span>الكيمياء</span> الصف الثاني الثانوي</p>
+                        <p>
+                            شرح منهج <span>الكيمياء</span> الصف الثاني الثانوي
+                        </p>
                     </div>
                 </Link>
 
-                <Link className="card" to='/courses/Physics'>
+                <Link className="card" to="/courses/Physics">
                     <div className="card-img">
                         <img src={phyImage} alt="Course Image-2 " />
                     </div>
                     <div className="card-des">
                         <h1>الصف الثاني الثانوي</h1>
-                        <p>شرح منهج <span>الفيزياء</span> الصف الثاني الثانوي</p>
+                        <p>
+                            شرح منهج <span>الفيزياء</span> الصف الثاني الثانوي
+                        </p>
                     </div>
                 </Link>
             </div>
