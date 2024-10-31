@@ -118,6 +118,18 @@ const Authentcation = ({auth}) => {
                                                         {/* icon قفل */}
                                                         <MdOutlineLock />
                                                     </div>
+                                                    <div className="form-group mt-2">
+                                                        <input
+                                                            type="password"
+                                                            name="logpass"
+                                                            className="form-style"
+                                                            placeholder="Confirm Your Password"
+                                                            id="logpass"
+                                                            autoComplete="off"
+                                                        />
+                                                        {/* icon قفل */}
+                                                        <MdOutlineLock />
+                                                    </div>
                                                     <a
                                                         href="#"
                                                         className="btn mt-4"
