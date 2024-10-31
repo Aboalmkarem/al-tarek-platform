@@ -1,12 +1,8 @@
 import { FaUser } from "react-icons/fa";
 import "./profile.css";
-import { Link, NavLink, Route, Routes } from "react-router-dom";
+import { NavLink, Route, Routes } from "react-router-dom";
 import User from "./profileFiles/user";
 import FavCourses from "./profileFiles/favCourses";
-// import CCharge from './profile-pages/code-charge/cCharge'
-// import CCourses from './profile-pages/code-courses/cCourses'
-// import Wallet from './profile-pages/wallet/wallet'
-// import Courses from './profile-pages/courses/courses'
 
 const Profile = () => {
     return (
