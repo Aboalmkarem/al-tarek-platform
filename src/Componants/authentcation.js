@@ -4,7 +4,7 @@ import { MdOutlineLock, MdOutlineAlternateEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { useRef, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { json, useNavigate } from "react-router";
 import { toLandingPage } from "./handler";
 
 const Authentcation = ({ authToggle }) => {
@@ -15,34 +15,30 @@ const Authentcation = ({ authToggle }) => {
     );
     console.log("isAutherized", isAutherized);
 
-    async function makeRequest(endPoint, reqBody) {
+    async function makeRequest(endPoint, reqOptions) {
         axios
-            .post(
-                `${process.env.REACT_APP_NOT_SECRET_CODE}/api/auth/${endPoint}`,
-                reqBody,
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
-            )
+            .post(`http://localhost:1337/api/auth/${endPoint}`, reqOptions, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
             .then((res) => {
                 console.log(res);
                 if (res.data.jwt && res.data.user) {
-                    setMessage('successfull registration')
+                    setMessage("successfull registration");
                     localStorage.setItem("token", res.data.jwt);
                     setIsAuthenticated(true);
-                    toLandingPage(navigate)
+                    toLandingPage(navigate);
                 } else {
-                    setMessage('error')
+                    setMessage("error");
                 }
             })
             .catch((err) => {
-                console.log(err)
-                if (err.response?.data?.error?.message != undefined) {
-                    setMessage(err.response?.data?.error?.message)
+                console.log(err);
+                if (err.response?.data?.error?.message !== undefined) {
+                    setMessage(err.response?.data?.error?.message);
                 } else {
-                    setMessage(err.message)
+                    setMessage(err.message);
                 }
             });
     }
@@ -56,8 +52,11 @@ const Authentcation = ({ authToggle }) => {
         setMessage(null);
         const formData = new FormData(event.target);
         const jsonData = Object.fromEntries(formData);
+        if (endPoint === 'local/register' && jsonData.password !== jsonData.confirmPassword) {
+            setMessage("Passwords do not match");
+            return;
+        }
         const reqBody = JSON.stringify(jsonData)
-
         await makeRequest(endPoint, reqBody);
     }
 
@@ -143,65 +142,77 @@ const Authentcation = ({ authToggle }) => {
                                             </div>
                                         </div>
                                         <div className="card-back">
-    <div className="center-wrap">
-        <div className="section text-center">
-            <h4 className="mb-4 pb-3">Sign Up</h4>
-            <form onSubmit={(e) => authorizate("register", e)}>
-                <div className="form-group">
-                    <input
-                        type="text"
-                        name="logname"
-                        className="form-style"
-                        placeholder="Your Full Name"
-                        id="logname"
-                        autoComplete="off"
-                        required={true}
-                    />
-                    <FaUser />
-                </div>
-                <div className="form-group mt-2">
-                    <input
-                        type="email"
-                        name="logemail"
-                        className="form-style"
-                        placeholder="Your Email"
-                        id="logemail"
-                        autoComplete="off"
-                        required={true}
-                    />
-                    <MdOutlineAlternateEmail />
-                </div>
-                <div className="form-group mt-2">
-                    <input
-                        type="password"
-                        name="logpass"
-                        className="form-style"
-                        placeholder="Your Password"
-                        id="logpass"
-                        autoComplete="off"
-                        required={true}
-                    />
-                    <MdOutlineLock />
-                </div>
-                <div className="form-group mt-2">
-                    <input
-                        type="password"
-                        name="confirmPassword"
-                        className="form-style"
-                        placeholder="Confirm Your Password"
-                        id="confirmPassword"
-                        autoComplete="off"
-                        required={true}
-                    />
-                    <MdOutlineLock />
-                </div>
-                <input type="submit" className="btn mt-4" value="Sign Up" />
-            </form>
-            <div>{message}</div>
-        </div>
-    </div>
-</div>
-
+                                            <div className="center-wrap">
+                                                <div className="section text-center">
+                                                    <h4 className="mb-4 pb-3">
+                                                        Sign Up
+                                                    </h4>
+                                                    <form
+                                                        onSubmit={(e) =>
+                                                            authorizate(
+                                                                "local/register",
+                                                                e
+                                                            )
+                                                        }
+                                                    >
+                                                        <div className="form-group">
+                                                            <input
+                                                                type="text"
+                                                                name="username"
+                                                                className="form-style"
+                                                                placeholder="Your Full Name"
+                                                                id="logname"
+                                                                autoComplete="off"
+                                                                required={true}
+                                                            />
+                                                            <FaUser />
+                                                        </div>
+                                                        <div className="form-group mt-2">
+                                                            <input
+                                                                type="email"
+                                                                name="email"
+                                                                className="form-style"
+                                                                placeholder="Your Email"
+                                                                id="logemail"
+                                                                autoComplete="off"
+                                                                required={true}
+                                                            />
+                                                            <MdOutlineAlternateEmail />
+                                                        </div>
+                                                        <div className="form-group mt-2">
+                                                            <input
+                                                                type="password"
+                                                                name="password"
+                                                                className="form-style"
+                                                                placeholder="Your Password"
+                                                                id="logpass"
+                                                                autoComplete="off"
+                                                                required={true}
+                                                            />
+                                                            <MdOutlineLock />
+                                                        </div>
+                                                        <div className="form-group mt-2">
+                                                            <input
+                                                                type="password"
+                                                                name="confirmPassword"
+                                                                className="form-style"
+                                                                placeholder="Confirm Your Password"
+                                                                id="confirmPassword"
+                                                                autoComplete="off"
+                                                                required={true}
+                                                            />
+                                                            <MdOutlineLock />
+                                                        </div>
+                                                        <input
+                                                            type="submit"
+                                                            className="btn mt-4"
+                                                            value="Sign Up"
+                                                        />
+                                                    </form>
+                                                    <div>{message}</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
