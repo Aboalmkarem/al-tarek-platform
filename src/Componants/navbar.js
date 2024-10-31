@@ -26,7 +26,7 @@ const Navbar = ({ isChecked, handleChange }) => {
         setUserName(res.data.username)
     }).catch((err) => {
         console.log(err)
-        if (err.status === 403) {
+        if (err.status === 403 || err.status === 401) {
             setIsAuthenticated(false)
         }
     })
