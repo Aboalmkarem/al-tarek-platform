@@ -1,38 +1,65 @@
 import { Link } from "react-router-dom";
 import logo from "../Assets/logo.png";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import axios from "axios";
 
 const Navbar = ({ isChecked, handleChange }) => {
+    const [open, setOpen] = useState(false);
+    let drop = useRef();
+
     const [isAutherized, setIsAuthenticated] = useState(
         localStorage.getItem("token") ? true : false
     );
     console.log("isAutherized", isAutherized);
-
-    const [username, setUserName] = useState(null)
+    const [username, setUserName] = useState(null);
 
     const reqOptions = {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
-        }
+        },
+    };
+
+    async function accessUser() {
+        await axios
+            .get(
+                `${process.env.REACT_APP_NOT_SECRET_CODE}/api/users/me`,
+                reqOptions
+            )
+            .then((res) => {
+                console.log(res.data.username);
+                setUserName(res.data.username);
+            })
+            .catch((err) => {
+                console.log(err);
+                if (err.status === 403 || err.status === 401) {
+                    setIsAuthenticated(false);
+                }
+            });
     }
 
-    axios.get(`${process.env.REACT_APP_NOT_SECRET_CODE}/api/users/me`, reqOptions)
-    .then((res) => {
-        console.log(res.data.username)
-        setUserName(res.data.username)
-    }).catch((err) => {
-        console.log(err)
-        if (err.status === 403) {
-            setIsAuthenticated(false)
+    function signOut() {
+        localStorage.removeItem("token");
+        console.log("Signing out");
+        window.location.reload();
+    }
+
+    useEffect(() => {
+        accessUser();
+        if (isAutherized) {
+            let handle = (e) => {
+                if (!drop.current.contains(e.target)) {
+                    setOpen(false);
+                }
+            };
+            document.addEventListener("mousedown", handle);
         }
-    })
+    });
 
     return (
-        <header>
+        <header className="nav">
             <div className="left-icons">
                 <Link to="/al-tarek-platform">
                     <img src={logo} alt="Logo" />
@@ -79,12 +106,60 @@ const Navbar = ({ isChecked, handleChange }) => {
             <div className="right-buttons">
                 {isAutherized ? (
                     <>
-                        <Link to="/myProfile/user">
-                            <button className="btn btn-ghost btn-xs sm:btn-sm md:btn-md lg:btn-lg">
-                                <FaUser></FaUser>
-                            </button>
-                            <span>{username}</span>
-                        </Link>
+                        <button
+                            className="btn btn-ghost btn-xs sm:btn-sm md:btn-md lg:btn-lg"
+                            onClick={() => {
+                                setOpen(!open);
+                            }}
+                        >
+                            <FaUser></FaUser>
+                        </button>
+                        <div
+                            className={`user-dropMenu ${open ? "active" : ""}`}
+                            ref={drop}
+                        >
+                            <ul>
+                                <Link to="/al-tarek-platform">
+                                    <li
+                                        onClick={() => {
+                                            setOpen(!open);
+                                        }}
+                                    >
+                                        الصفحة الرئيسية
+                                    </li>
+                                </Link>
+                                <hr></hr>
+                                <p>اهلا {username}</p>
+                                <Link to="/myProfile/favCourses">
+                                    <li
+                                        onClick={() => {
+                                            setOpen(!open);
+                                        }}
+                                    >
+                                        شحن كود السنتر
+                                    </li>
+                                </Link>
+                                <Link to="/myProfile/user">
+                                    <li
+                                        onClick={() => {
+                                            setOpen(!open);
+                                        }}
+                                    >
+                                        حسابي
+                                    </li>
+                                </Link>
+                                <Link to="#">
+                                    <li
+                                        onClick={() => {
+                                            setOpen(!open);
+                                            signOut();
+                                        }}
+                                    >
+                                        تسجيل خروج
+                                    </li>
+                                </Link>
+                            </ul>
+                        </div>
                     </>
                 ) : (
                     <>
