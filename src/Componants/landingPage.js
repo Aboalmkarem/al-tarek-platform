@@ -25,11 +25,9 @@ const LandingPage = () => {
                         أول منصه تعليمية باستعمال <span>الذكاء الاصطناعي</span>
                     </h2>
 
-                    <div className="main-btnm">
-                        <a className="btnm" href="#cs">
+                    <Link className="main-btnm">
                             يلا بينا <span> نتعلم</span>
-                        </a>
-                    </div>
+                    </Link>
                 </div>
             </div>
             {/* ======== list start ========== */}
@@ -44,7 +42,7 @@ const LandingPage = () => {
             </div>
             {/* ======== courses start ========== */}
             <div className="courses">
-                <Link className="card" to='/course'>
+                <Link className="card" to='/courses/Chemistry'>
                     <div className="card-img">
                         <img src={chemImage} alt="Course Image 1" />
                     </div>
@@ -54,7 +52,7 @@ const LandingPage = () => {
                     </div>
                 </Link>
 
-                <Link className="card" to='/course'>
+                <Link className="card" to='/courses/Physics'>
                     <div className="card-img">
                         <img src={phyImage} alt="Course Image-2 " />
                     </div>
