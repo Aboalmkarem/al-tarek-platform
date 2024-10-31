@@ -4,6 +4,7 @@ import { MdOutlineLock, MdOutlineAlternateEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
+import axios, { Axios } from "axios";
 
 const Authentcation = ({ authToggle }) => {
     const [message, setMessage] = useState(null);
@@ -17,45 +18,56 @@ const Authentcation = ({ authToggle }) => {
     function toLandingPage() {
         setTimeout(() => {
             navigate("/al-tarek-platform");
-            window.location.reload()
+            window.location.reload();
             return;
-        },500)
+        }, 500);
     }
-    
-    async function authorizate(endPoint,event) {
-        if(isAutherized) {
-            setMessage("You are already logged in")
-            toLandingPage()
+
+    async function makeRequest(endPoint, reqBody) {
+        axios
+            .post(
+                `${process.env.REACT_APP_NOT_SECRET_CODE}/api/auth/${endPoint}`,
+                reqBody,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            )
+            .then((res) => {
+                console.log(res);
+                if (res.data.jwt && res.data.user) {
+                    setMessage('successfull registration')
+                    localStorage.setItem("token", res.data.jwt);
+                    setIsAuthenticated(true);
+                    toLandingPage()
+                } else {
+                    setMessage('error')
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+                if (err.response?.data?.error?.message != undefined) {
+                    setMessage(err.response?.data?.error?.message)
+                } else {
+                    setMessage(err.message)
+                }
+            });
+    }
+
+    async function authorizate(endPoint, event) {
+        if (isAutherized) {
+            setMessage("You already logged in");
+            toLandingPage();
         }
         event.preventDefault();
         setMessage(null);
         const formData = new FormData(event.target);
         const jsonData = Object.fromEntries(formData);
+        const reqBody = JSON.stringify(jsonData)
 
-        const reqOptions = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(jsonData),
-        };
-
-        const req = await fetch(
-            `${process.env.REACT_APP_NOT_SECRET_CODE}/api/auth/${endPoint}`,
-            reqOptions
-        );
-        const res = await req.json();
-
-        if (res.error) {
-            setMessage(res.error.message);
-            console.log(res.error.message);
-            return;
-        }
-        if (res.jwt && res.user) {
-            setMessage("successfull registeraiton");
-            console.log("successfull registeraiton");
-            localStorage.setItem("token", res.jwt);
-            toLandingPage()
-        }
-    };
+        await makeRequest(endPoint, reqBody);
+    }
 
     const authToggleRef = useRef();
     return (
@@ -87,7 +99,14 @@ const Authentcation = ({ authToggle }) => {
                                                     <h4 className="mb-4 pb-3">
                                                         Log In
                                                     </h4>
-                                                    <form onSubmit={(e) => {authorizate('local', e)}}>
+                                                    <form
+                                                        onSubmit={(e) => {
+                                                            authorizate(
+                                                                "local",
+                                                                e
+                                                            );
+                                                        }}
+                                                    >
                                                         <div className="form-group">
                                                             <input
                                                                 type="email"
@@ -96,6 +115,7 @@ const Authentcation = ({ authToggle }) => {
                                                                 placeholder="Your Email"
                                                                 id="registerEmail"
                                                                 autoComplete="off"
+                                                                required={true}
                                                             />
                                                             {/* icon email */}
                                                             <MdOutlineAlternateEmail />
@@ -108,6 +128,7 @@ const Authentcation = ({ authToggle }) => {
                                                                 placeholder="Your Password"
                                                                 id="registerPassword"
                                                                 autoComplete="off"
+                                                                required={true}
                                                             />
                                                             <MdOutlineLock />
                                                         </div>
@@ -135,7 +156,14 @@ const Authentcation = ({ authToggle }) => {
                                                     <h4 className="mb-4 pb-3">
                                                         Sign Up
                                                     </h4>
-                                                    <form onSubmit={(e) => {authorizate('local/register', e)}}>
+                                                    <form
+                                                        onSubmit={(e) => {
+                                                            authorizate(
+                                                                "local/register",
+                                                                e
+                                                            );
+                                                        }}
+                                                    >
                                                         <div className="form-group">
                                                             <input
                                                                 type="text"
@@ -144,6 +172,7 @@ const Authentcation = ({ authToggle }) => {
                                                                 placeholder="Your Full Name"
                                                                 id="logname"
                                                                 autoComplete="off"
+                                                                required={true}
                                                             />
                                                             {/* icon person */}
                                                             <FaUser />
@@ -156,6 +185,7 @@ const Authentcation = ({ authToggle }) => {
                                                                 placeholder="Your Email"
                                                                 id="logemail"
                                                                 autoComplete="off"
+                                                                required={true}
                                                             />
                                                             {/* icon email */}
                                                             <MdOutlineAlternateEmail />
@@ -168,6 +198,7 @@ const Authentcation = ({ authToggle }) => {
                                                                 placeholder="Your Password"
                                                                 id="logpass"
                                                                 autoComplete="off"
+                                                                required={true}
                                                             />
                                                             {/* icon قفل */}
                                                             <MdOutlineLock />
@@ -176,6 +207,7 @@ const Authentcation = ({ authToggle }) => {
                                                             type="submit"
                                                             className="btn mt-4"
                                                         />
+                                                        <div>{message}</div>
                                                     </form>
                                                 </div>
                                             </div>
