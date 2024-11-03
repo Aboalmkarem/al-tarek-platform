@@ -5,13 +5,13 @@ import LandingPage from "./Componants/landingPage";
 import Authentication from "./Componants/authentcation";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./Componants/footer";
-import Courses from './Componants/courses';
+import Courses from "./Componants/courses";
 import ScrollToTop from "./Componants/ScrollToTop";
 import Profile from "./Componants/profile";
 import User from "./Componants/profileFiles/user";
 import FavCourses from "./Componants/profileFiles/favCourses";
+import Course from "./Componants/course";
 // import { useState } from "react";
-
 
 function App() {
     const preference = window.matchMedia(
@@ -22,7 +22,7 @@ function App() {
     return (
         <div className="app" data-theme={isDark ? "dark" : "light"}>
             <BrowserRouter>
-                <ScrollToTop/>
+                <ScrollToTop />
                 {/* navbar start */}
                 <Navbar
                     isChecked={isDark}
@@ -35,7 +35,7 @@ function App() {
                     {/* landing page start */}
                     <Route
                         path="/al-tarek-platform"
-                        element={<LandingPage/>}
+                        element={<LandingPage />}
                     />
                     {/* landing page end */}
                     <Route
@@ -46,11 +46,20 @@ function App() {
                         path="/authentcation/signin"
                         element={<Authentication authToggle={true} />}
                     />
-                    <Route path="/courses/Chemistry" element={<Courses category={'Chemistry'}/>} />
-                    <Route path="/courses/Physics" element={<Courses category={'Physics'}/>} />
-                    <Route path='/myProfile/*' element={<Profile></Profile>}>
-                        <Route path='user' element={<User></User>}></Route>
-                        <Route path="favCourses" element={<FavCourses></FavCourses>}></Route>
+                    <Route
+                        path="/courses/:categoryName"
+                        element={<Courses/>}
+                    />
+                    <Route
+                        path="/courses/:categoryName/:id"
+                        element={<Course></Course>}
+                    />
+                    <Route path="/myProfile/*" element={<Profile></Profile>}>
+                        <Route path="user" element={<User></User>}></Route>
+                        <Route
+                            path="favCourses"
+                            element={<FavCourses></FavCourses>}
+                        ></Route>
                     </Route>
                 </Routes>
                 <Footer></Footer>

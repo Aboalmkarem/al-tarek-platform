@@ -4,56 +4,64 @@ import { MdOutlineLock, MdOutlineAlternateEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { useRef, useState } from "react";
 import axios from "axios";
-import { json, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { toLandingPage } from "./handler";
+import { createRoot } from "react-dom/client";
+import Message from "./message";
 
 const Authentcation = ({ authToggle }) => {
     const navigate = useNavigate();
-    const [message, setMessage] = useState(null);
     const [isAutherized, setIsAuthenticated] = useState(
         localStorage.getItem("token") ? true : false
     );
-    console.log("isAutherized", isAutherized);
+    const messageRef = useRef()
+    const rootRef = useRef(null); // Ref to store the root instance
+
+    function showMessage(isErr, message) {
+        if (!rootRef.current) {
+            rootRef.current = createRoot(messageRef.current);
+        }
+        rootRef.current.render(
+            <Message options={{isErr: isErr, message: message}} />
+        );
+    }
 
     async function makeRequest(endPoint, reqOptions) {
         axios
-            .post(`http://localhost:1337/api/auth/${endPoint}`, reqOptions, {
+            .post(`${process.env.REACT_APP_NOT_SECRET_CODE}/api/auth/${endPoint}`, reqOptions, {
                 headers: {
                     "Content-Type": "application/json",
                 },
             })
             .then((res) => {
-                console.log(res);
+                
                 if (res.data.jwt && res.data.user) {
-                    setMessage("successfull registration");
+                    showMessage(false, `successfull registration`)
                     localStorage.setItem("token", res.data.jwt);
                     setIsAuthenticated(true);
                     toLandingPage(navigate);
-                } else {
-                    setMessage("error");
                 }
             })
             .catch((err) => {
                 console.log(err);
                 if (err.response?.data?.error?.message !== undefined) {
-                    setMessage(err.response?.data?.error?.message);
+                    showMessage(true, `Error: ${err.response?.data?.error?.message}`)
                 } else {
-                    setMessage(err.message);
+                    showMessage(true, `Error: ${err.message}`)
                 }
             });
     }
 
     async function authorizate(endPoint, event) {
         if (isAutherized) {
-            setMessage("You already logged in");
+            showMessage(true, "You already logged in")
             toLandingPage(navigate);
         }
         event.preventDefault();
-        setMessage(null);
         const formData = new FormData(event.target);
         const jsonData = Object.fromEntries(formData);
         if (endPoint === 'local/register' && jsonData.password !== jsonData.confirmPassword) {
-            setMessage("Passwords do not match");
+            showMessage(true, `Passwords do not match`)
             return;
         }
         const reqBody = JSON.stringify(jsonData)
@@ -63,6 +71,7 @@ const Authentcation = ({ authToggle }) => {
     const authToggleRef = useRef();
     return (
         <div className="authentcation">
+            <div ref={messageRef}></div>
             <div className="section">
                 <div className="container">
                     <div className="row full-height justify-content-center">
@@ -128,7 +137,6 @@ const Authentcation = ({ authToggle }) => {
                                                             className="btn mt-4"
                                                         />
                                                     </form>
-                                                    <div>{message}</div>
                                                     <p className="mb-0 mt-4 text-center">
                                                         <a
                                                             href="#0"
@@ -209,7 +217,6 @@ const Authentcation = ({ authToggle }) => {
                                                             value="Sign Up"
                                                         />
                                                     </form>
-                                                    <div>{message}</div>
                                                 </div>
                                             </div>
                                         </div>
