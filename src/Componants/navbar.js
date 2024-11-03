@@ -41,12 +41,7 @@ const Navbar = ({ isChecked, handleChange }) => {
                         setIsAuthenticated(false);
                     }
                     if (err.response === undefined) {
-                        if (!rootRef.current) {
-                            rootRef.current = createRoot(messageRef.current);
-                        }
-                        rootRef.current.render(
-                            <Message isErr={true} message={`Error: ${err.message}`} />
-                        );
+                        showMessage(true, `Error: ${err.message}`)
                     }
                 });
             let handleClickOutside = (e) => {
@@ -60,6 +55,15 @@ const Navbar = ({ isChecked, handleChange }) => {
             };
         }
     });
+
+    function showMessage(isErr, message) {
+        if (!rootRef.current) {
+            rootRef.current = createRoot(messageRef.current);
+        }
+        rootRef.current.render(
+            <Message options={{isErr: isErr, message: message}} />
+        );
+    }
 
     return (
         <header className="nav">
@@ -155,6 +159,7 @@ const Navbar = ({ isChecked, handleChange }) => {
                                 <Link to="#">
                                     <li
                                         onClick={() => {
+                                            showMessage(false, "sign out successfully")
                                             setOpen(!open);
                                             signOut(navigate);
                                         }}

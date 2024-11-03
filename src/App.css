@@ -145,7 +145,7 @@ header .right-buttons {
 .alert {
     position: fixed;
     top: 7rem;
-    transform: translate(20rem);
+    transform: translate(30rem);
     transition: transform .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     direction: ltr;
     max-width: max-content;
@@ -387,6 +387,15 @@ header .right-buttons {
 .space {
     width: 100%;
     height: 40vh;
+}
+
+.course-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    /* background-color: #33beea; */
 }
 @media screen and (max-width: 900px) {
     .main {

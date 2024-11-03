@@ -1,14 +1,18 @@
 import { Link } from "react-router-dom";
 import "./courses.css";
 import Card from "./card";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { createRoot } from "react-dom/client";
+import Message from "./message";
 
-const Courses = ({ category }) => {
+const Courses = () => {
     const [showCards, setShowCards] = useState(false);
     const [showErrors, setShowErrors] = useState(false);
     const [err, setErr] = useState("");
     const [courses, setCourses] = useState(false);
+    const messageRef = useRef()
+    const rootRef = useRef(null); // Ref to store the root instance
 
     async function getCourses() {
         const reqOptions = {
@@ -19,11 +23,11 @@ const Courses = ({ category }) => {
         };
         axios
             .get(
-                `${process.env.REACT_APP_NOT_SECRET_CODE}/api/courses?populate=*&filters[category][$eq]=${category}`,
+                `${process.env.REACT_APP_NOT_SECRET_CODE}/api/courses?populate=*&filters[category][$eq]=${window.location.pathname.split('/courses/')[1]}`,
                 reqOptions
             )
             .then((res) => {
-                // console.log(res.data.data)
+                console.log(res.data.data)
                 if (res.data.data.length === 0) {
                     setShowCards(true);
                 } else {
@@ -38,10 +42,22 @@ const Courses = ({ category }) => {
                     error.response?.status === 401 &&
                     error.response?.statusText === "Unauthorized"
                 ) {
+                    if (!rootRef.current) {
+                        rootRef.current = createRoot(messageRef.current);
+                    }
+                    rootRef.current.render(
+                        <Message options={{isErr: true, message: `Error: you must be logged in. please login first`}} />
+                    );
                     setErr("you must be logged in. please login first");
                     setShowErrors(true);
                 }
                 if (error.response?.status === undefined) {
+                    if (!rootRef.current) {
+                        rootRef.current = createRoot(messageRef.current);
+                    }
+                    rootRef.current.render(
+                        <Message options={{isErr: true, message: `Error: ${error.message}`}} />
+                    );
                     setErr(`${error.message}. please try again later`);
                     setShowErrors(true);
                 }
@@ -54,46 +70,43 @@ const Courses = ({ category }) => {
 
     return (
         <div className="courses-file">
+            <div ref={messageRef}></div>
             <h2 className="homeh" id="mainh">
-                {category}
+                {window.location.pathname.split('/courses/')[1]}
             </h2>
-            <div className="cards">
-                {showErrors ? (
-                    <>errors: {err}</>
-                ) : showCards ? (
-                    <>
-                        {courses ? (
-                            <>
-                                {courses.map((course) => {
-                                    return (
-                                        <Card
-                                            id={course.id}
-                                            link={course.id}
-                                            img={`${process.env.REACT_APP_NOT_SECRET_CODE}${course.attributes.courseCoverIMG.data.attributes.url}`}
-                                            class="card"
-                                            name={course.attributes.title}
-                                            info={course.attributes.discription}
-                                            // isSub={course.isSub}
-                                            editDate={
-                                                course.attributes.updatedAt
-                                            }
-                                            publishDate={
-                                                course.attributes.publishedAt
-                                            }
-                                        />
-                                    );
-                                })}
-                            </>
-                        ) : (
-                            <>
-                                <p>there is no course</p>
-                            </>
-                        )}
-                    </>
-                ) : (
-                    <p>(reloading card ...)</p>
-                )}
-            </div>
+            {showErrors ? (
+                <>errors: {err}</>
+            ) : showCards ? (
+                <div className="cards">
+                    {courses ? (
+                        <>
+                            {courses.map((course) => {
+                                return (
+                                    <Card
+                                        id={course.id}
+                                        link={course.id}
+                                        img={`${process.env.REACT_APP_NOT_SECRET_CODE}${course.attributes.courseCoverIMG.data.attributes.url}`}
+                                        class="card"
+                                        name={course.attributes.title}
+                                        info={course.attributes.discription}
+                                        // isSub={course.isSub}
+                                        editDate={course.attributes.updatedAt}
+                                        publishDate={
+                                            course.attributes.publishedAt
+                                        }
+                                    />
+                                );
+                            })}
+                        </>
+                    ) : (
+                        <>
+                            <p>there is no course</p>
+                        </>
+                    )}
+                </div>
+            ) : (
+                <p>(reloading card ...)</p>
+            )}
             <hr id="hr2"></hr>
             <div className="to-account">
                 <h6>اعرف تفاصيل اكتر عن حسابك</h6>
