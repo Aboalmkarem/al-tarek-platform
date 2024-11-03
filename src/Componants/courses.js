@@ -67,7 +67,6 @@ const Courses = ({ category }) => {
                                 {courses.map((course) => {
                                     return (
                                         <Card
-                                            key={course.id}
                                             id={course.id}
                                             link={course.id}
                                             img={`${process.env.REACT_APP_NOT_SECRET_CODE}${course.attributes.courseCoverIMG.data.attributes.url}`}

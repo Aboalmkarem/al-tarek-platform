@@ -4,7 +4,7 @@ import { MdOutlineLock, MdOutlineAlternateEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { useRef, useState } from "react";
 import axios from "axios";
-import { json, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { toLandingPage } from "./handler";
 
 const Authentcation = ({ authToggle }) => {

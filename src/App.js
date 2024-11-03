@@ -10,6 +10,7 @@ import ScrollToTop from "./Componants/ScrollToTop";
 import Profile from "./Componants/profile";
 import User from "./Componants/profileFiles/user";
 import FavCourses from "./Componants/profileFiles/favCourses";
+import Message from "./Componants/message";
 // import { useState } from "react";
 
 
