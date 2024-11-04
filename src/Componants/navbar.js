@@ -2,10 +2,9 @@ import { Link } from "react-router-dom";
 import logo from "../Assets/logo.png";
 import { useEffect, useRef, useState } from "react";
 import { FaUser } from "react-icons/fa";
-import { signOut } from "./handler";
+import { getUser, signOut } from "./handler";
 import { useNavigate } from "react-router";
 import Message from "./message";
-import axios from "axios";
 import { createRoot } from "react-dom/client";
 
 const Navbar = ({ isChecked, handleChange }) => {
@@ -21,18 +20,7 @@ const Navbar = ({ isChecked, handleChange }) => {
 
     useEffect(() => {
         if (isAutherized) {
-            const reqOptions = {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-            };
-            axios
-                .get(
-                    `${process.env.REACT_APP_NOT_SECRET_CODE}/api/users/me`,
-                    reqOptions
-                )
+            getUser()
                 .then((res) => {
                     setUserName(res.data.username);
                 })
@@ -41,7 +29,7 @@ const Navbar = ({ isChecked, handleChange }) => {
                         setIsAuthenticated(false);
                     }
                     if (err.response === undefined) {
-                        showMessage(true, `Error: ${err.message}`)
+                        showMessage(true, `Error: ${err.message}`);
                     }
                 });
             let handleClickOutside = (e) => {
@@ -61,7 +49,7 @@ const Navbar = ({ isChecked, handleChange }) => {
             rootRef.current = createRoot(messageRef.current);
         }
         rootRef.current.render(
-            <Message options={{isErr: isErr, message: message}} />
+            <Message options={{ isErr: isErr, message: message }} />
         );
     }
 
@@ -159,7 +147,10 @@ const Navbar = ({ isChecked, handleChange }) => {
                                 <Link to="#">
                                     <li
                                         onClick={() => {
-                                            showMessage(false, "sign out successfully")
+                                            showMessage(
+                                                false,
+                                                "sign out successfully"
+                                            );
                                             setOpen(!open);
                                             signOut(navigate);
                                         }}
