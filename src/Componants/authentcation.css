@@ -36,6 +36,7 @@
   font-weight: 700;
 }
 .authentcation .section{
+  direction: ltr;
   position: relative;
   width: 100%;
   display: block;
