@@ -14,6 +14,15 @@ const Courses = () => {
     const messageRef = useRef()
     const rootRef = useRef(null); // Ref to store the root instance
 
+    function showMessage(isErr, message) {
+        if (!rootRef.current) {
+            rootRef.current = createRoot(messageRef.current);
+        }
+        rootRef.current.render(
+            <Message options={{ isErr: isErr, message: message }} />
+        );
+    }
+
     async function getCourses() {
         const reqOptions = {
             headers: {
@@ -36,28 +45,16 @@ const Courses = () => {
                 }
             })
             .catch((error) => {
-                // console.log(error);
-                // console.log(error.status);
                 if (
                     error.response?.status === 401 &&
                     error.response?.statusText === "Unauthorized"
                 ) {
-                    if (!rootRef.current) {
-                        rootRef.current = createRoot(messageRef.current);
-                    }
-                    rootRef.current.render(
-                        <Message options={{isErr: true, message: `Error: you must be logged in. please login first`}} />
-                    );
+                    showMessage(true, `Error: you must be logged in. please login first`)
                     setErr("you must be logged in. please login first");
                     setShowErrors(true);
                 }
                 if (error.response?.status === undefined) {
-                    if (!rootRef.current) {
-                        rootRef.current = createRoot(messageRef.current);
-                    }
-                    rootRef.current.render(
-                        <Message options={{isErr: true, message: `Error: ${error.message}`}} />
-                    );
+                    showMessage(true, `Error: ${error.message}`);
                     setErr(`${error.message}. please try again later`);
                     setShowErrors(true);
                 }
