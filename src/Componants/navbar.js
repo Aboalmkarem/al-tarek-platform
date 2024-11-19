@@ -126,7 +126,7 @@ const Navbar = ({ isChecked, handleChange }) => {
                                 </Link>
                                 <hr></hr>
                                 <p>اهلا {username}</p>
-                                <Link to="/myProfile/favCourses">
+                                <Link to="/al-tarek-platform/myProfile/favCourses">
                                     <li
                                         onClick={() => {
                                             setOpen(!open);
@@ -135,7 +135,7 @@ const Navbar = ({ isChecked, handleChange }) => {
                                         شحن كود السنتر
                                     </li>
                                 </Link>
-                                <Link to="/myProfile/user">
+                                <Link to="/al-tarek-platform/myProfile/user">
                                     <li
                                         onClick={() => {
                                             setOpen(!open);
@@ -163,12 +163,12 @@ const Navbar = ({ isChecked, handleChange }) => {
                     </>
                 ) : (
                     <>
-                        <Link to="/authentcation/login">
+                        <Link to="/al-tarek-platform/authentcation/login">
                             <button className="btn btn-ghost btn-xs sm:btn-sm md:btn-md lg:btn-lg">
                                 سجل دخول
                             </button>
                         </Link>
-                        <Link to="/authentcation/signin">
+                        <Link to="/al-tarek-platform/authentcation/signin">
                             <button className="btn btn-info btn-xs sm:btn-sm md:btn-md lg:btn-lg">
                                 انشئ حساب
                             </button>

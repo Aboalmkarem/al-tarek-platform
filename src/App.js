@@ -39,22 +39,22 @@ function App() {
                     />
                     {/* landing page end */}
                     <Route
-                        path="/authentcation/login"
+                        path="/al-tarek-platform/authentcation/login"
                         element={<Authentication authToggle={false} />}
                     />
                     <Route
-                        path="/authentcation/signin"
+                        path="/al-tarek-platform/authentcation/signin"
                         element={<Authentication authToggle={true} />}
                     />
                     <Route
-                        path="/courses/:categoryName"
+                        path="/al-tarek-platform/courses/:categoryName"
                         element={<Courses/>}
                     />
                     <Route
-                        path="/courses/:categoryName/:id"
+                        path="/al-tarek-platform/courses/:categoryName/:id"
                         element={<Course></Course>}
                     />
-                    <Route path="/myProfile/*" element={<Profile></Profile>}>
+                    <Route path="/al-tarek-platform/myProfile/*" element={<Profile></Profile>}>
                         <Route path="user" element={<User></User>}></Route>
                         <Route
                             path="favCourses"

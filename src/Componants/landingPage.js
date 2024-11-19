@@ -42,7 +42,7 @@ const LandingPage = () => {
             </div>
             {/* ======== courses start ========== */}
             <div className="courses" id="courses">
-                <Link className="card" to="/courses/Chemistry">
+                <Link className="card" to="/al-tarek-platform/courses/Chemistry">
                     <div className="card-img">
                         <img src={chemImage} alt="img" />
                     </div>
@@ -54,7 +54,7 @@ const LandingPage = () => {
                     </div>
                 </Link>
 
-                <Link className="card" to="/courses/Physics">
+                <Link className="card" to="/al-tarek-platform/courses/Physics">
                     <div className="card-img">
                         <img src={phyImage} alt="Course Image-2 " />
                     </div>
