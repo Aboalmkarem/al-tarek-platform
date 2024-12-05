@@ -4,8 +4,70 @@ import atom from "../Assets/—Pngtree—atom icon_8473596.png";
 import chemImage from "../Assets/chem.jpg";
 import phyImage from "../Assets/phy.jpg";
 import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { createRoot } from "react-dom/client";
+import Card from "./card";
+import axios from "axios";
+import Message from "./message";
 
 const LandingPage = () => {
+    const [showCards, setShowCards] = useState(false);
+    const [showErrors, setShowErrors] = useState(false);
+    const [err, setErr] = useState("");
+    const [categories, setCategories] = useState(false);
+    const messageRef = useRef()
+    const rootRef = useRef(null); // Ref to store the root instance
+
+    function showMessage(isErr, message) {
+        if (!rootRef.current) {
+            rootRef.current = createRoot(messageRef.current);
+        }
+        rootRef.current.render(
+            <Message options={{ isErr: isErr, message: message }} />
+        );
+    }
+
+    async function getCategories() {
+        const reqOptions = {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+        await axios
+            .get(
+                `${process.env.REACT_APP_NOT_SECRET_CODE}/api/categories?populate=*`,
+                reqOptions
+            )
+            .then((res) => {
+                // console.log(res.data.data)
+                if (res.data.data.length === 0) {
+                    setShowCards(true);
+                } else {
+                    setCategories(res.data.data);
+                    setShowCards(true);                    
+                }
+            })
+            .catch((error) => {
+                if (
+                    error.response?.status === 401 &&
+                    error.response?.statusText === "Unauthorized"
+                ) {
+                    showMessage(true, `Error: you must be logged in. please login first`)
+                    setErr("you must be logged in. please login first");
+                    setShowErrors(true);
+                }
+                if (error.response?.status === undefined) {
+                    showMessage(true, `Error: ${error.message}`);
+                    setErr(`${error.message}. please try again later`);
+                    setShowErrors(true);
+                }
+            });
+    }
+
+    useEffect(() => {
+        getCategories();
+    }, []);
+
     return (
         <div className="landing-page">
             <div className="main">
@@ -25,7 +87,7 @@ const LandingPage = () => {
                         أول منصه تعليمية باستعمال <span>الذكاء الاصطناعي</span>
                     </h2>
 
-                    <a className="main-btnm" href="#courses">
+                    <a className="main-btnm" href="#categories">
                         يلا بينا <span> نتعلم</span>
                     </a>
                 </div>
@@ -40,9 +102,44 @@ const LandingPage = () => {
                     الثانوي بكل بساطه وسهوله
                 </div>
             </div>
-            {/* ======== courses start ========== */}
-            <div className="courses" id="courses">
-                <Link className="card" to="/al-tarek-platform/courses/Chemistry">
+            {/* ======== categories start ========== */}
+            <div className="categories" id="categories">
+                {showErrors ? (
+                    <>errors: {err}</>
+                ) : showCards ? (
+                    <div className="cards">
+                        {categories ? (
+                            <>
+                                {categories.map((category) => {
+                                    return (
+                                        <Card
+                                            key={category.id}
+                                            link={`courses/${category.attributes.name}`}
+                                            img={`${process.env.REACT_APP_NOT_SECRET_CODE}${category.attributes.coverIMG.data.attributes.url}`}
+                                            class="card"
+                                            name={category.attributes.title}
+                                            info={category.attributes.discription}
+                                            // isSub={category.isSub}
+                                            editDate={
+                                                category.attributes.updatedAt
+                                            }
+                                            publishDate={
+                                                category.attributes.publishedAt
+                                            }
+                                        />
+                                    );
+                                })}
+                            </>
+                        ) : (
+                            <>
+                                <p>there is no category</p>
+                            </>
+                        )}
+                    </div>
+                ) : (
+                    <p>(reloading card ...)</p>
+                )}
+                {/* <Link className="card" to="/al-tarek-platform/courses/Chemistry">
                     <div className="card-img">
                         <img src={chemImage} alt="img" />
                     </div>
@@ -64,7 +161,7 @@ const LandingPage = () => {
                             شرح منهج <span>الفيزياء</span> الصف الثاني الثانوي
                         </p>
                     </div>
-                </Link>
+                </Link> */}
             </div>
             {/* ======== landing page end ========== */}
         </div>

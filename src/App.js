@@ -11,39 +11,33 @@ import Profile from "./Componants/profile";
 import User from "./Componants/profileFiles/user";
 import FavCourses from "./Componants/profileFiles/favCourses";
 import Course from "./Componants/course";
-// import { useState } from "react";
 
 function App() {
     const preference = window.matchMedia(
         "(prefers-color-scheme: dark)"
     ).matches;
     const [isDark, setIsDark] = useLocalStorage("isDark", preference);
-    // const [courseCategory, setCourseCategory] = useState();
     return (
         <div className="app" data-theme={isDark ? "dark" : "light"}>
             <BrowserRouter>
                 <ScrollToTop />
-                {/* navbar start */}
                 <Navbar
                     isChecked={isDark}
                     handleChange={() => {
                         setIsDark(!isDark);
                     }}
                 />
-                {/* navbar end */}
                 <Routes>
-                    {/* landing page start */}
                     <Route
                         path="/al-tarek-platform"
                         element={<LandingPage />}
                     />
-                    {/* landing page end */}
                     <Route
                         path="/al-tarek-platform/authentcation/login"
                         element={<Authentication authToggle={false} />}
                     />
                     <Route
-                        path="/al-tarek-platform/authentcation/signin"
+                        path="/al-tarek-platform/authentcation/signup"
                         element={<Authentication authToggle={true} />}
                     />
                     <Route
@@ -51,7 +45,7 @@ function App() {
                         element={<Courses/>}
                     />
                     <Route
-                        path="/al-tarek-platform/courses/:categoryName/:id"
+                        path="/al-tarek-platform/courses/:categoryName/course/:id"
                         element={<Course></Course>}
                     />
                     <Route path="/al-tarek-platform/myProfile/*" element={<Profile></Profile>}>

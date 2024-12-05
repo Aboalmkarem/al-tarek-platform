@@ -30,13 +30,13 @@ const Courses = () => {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
         };
-        axios
+        await axios
             .get(
-                `${process.env.REACT_APP_NOT_SECRET_CODE}/api/courses?populate=*&filters[category][$eq]=${window.location.pathname.split('/courses/')[1]}`,
+                `${process.env.REACT_APP_NOT_SECRET_CODE}/api/courses?populate=*&filters[category][name][$eq]=${window.location.pathname.split('/courses/')[1]}`,
                 reqOptions
             )
             .then((res) => {
-                console.log(res.data.data)
+                // console.log(res.data.data)
                 if (res.data.data.length === 0) {
                     setShowCards(true);
                 } else {
@@ -80,8 +80,8 @@ const Courses = () => {
                             {courses.map((course) => {
                                 return (
                                     <Card
-                                        id={course.id}
-                                        link={course.id}
+                                        key={course.id}
+                                        link={`course/${course.id}`}
                                         img={`${process.env.REACT_APP_NOT_SECRET_CODE}${course.attributes.courseCoverIMG.data.attributes.url}`}
                                         class="card"
                                         name={course.attributes.title}

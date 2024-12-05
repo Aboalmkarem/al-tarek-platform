@@ -27,3 +27,15 @@ export async function getUser() {
             reqOptions
         )
 }
+
+export function formatDate(date) {
+    date = new Date(date)
+    const dateOptions = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        weekday: "long"
+    };
+    return date.toLocaleDateString("ar-EG", dateOptions)
+    
+}

@@ -168,7 +168,7 @@ const Navbar = ({ isChecked, handleChange }) => {
                                 سجل دخول
                             </button>
                         </Link>
-                        <Link to="/al-tarek-platform/authentcation/signin">
+                        <Link to="/al-tarek-platform/authentcation/signup">
                             <button className="btn btn-info btn-xs sm:btn-sm md:btn-md lg:btn-lg">
                                 انشئ حساب
                             </button>

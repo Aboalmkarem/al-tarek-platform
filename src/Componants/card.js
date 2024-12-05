@@ -1,10 +1,8 @@
 import { Link } from 'react-router-dom'
 import './courses.css'
+import { formatDate } from './handler'
 
 function Card(prop) {
-
-    console.log(prop.link)
-
     return(
         <div className={prop.class} id={prop.id} key={prop.id}>
             <div className='card-img'><img src={prop.img} alt='img'></img></div>
@@ -25,8 +23,8 @@ function Card(prop) {
                         <button>الدخول للكورس</button>
                     </Link>
                     <div className="col2">
-                        <p>{prop.editDate}</p>
-                        <p>{prop.publishDate}</p>
+                        <p>{formatDate(prop.editDate)}</p>
+                        <p>{formatDate(prop.publishDate)}</p>
                     </div>
                 </div>
             </div>

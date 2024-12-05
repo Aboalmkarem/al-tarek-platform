@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Message from "./message";
 import { createRoot } from "react-dom/client";
+import { formatDate } from "./handler";
 
 const Course = () => {
     const [showData, setShowData] = useState(false);
@@ -33,7 +34,7 @@ const Course = () => {
         axios
             .get(
                 `${process.env.REACT_APP_NOT_SECRET_CODE}/api/courses/${
-                    window.location.pathname.split("/")[3]
+                    window.location.pathname.split("/course/")[1]
                 }?populate=*`,
                 reqOptions
             )
@@ -100,7 +101,7 @@ const Course = () => {
                                                         </span>
                                                     </span>
                                                     <span className="bg-blue-400 px-3 rounded-full opacity-90 text-slate-800">
-                                                        السبت، ٧ سبتمبر ٢٠٢٤
+                                                        {formatDate(course.createdAt)}
                                                     </span>
                                                 </div>
                                                 <div className="flex flex-wrap flex-row lg:space-x-reverse md:space-x-reverse sm:space-x-reverse space-x-reverse space-x-2">
@@ -111,14 +112,14 @@ const Course = () => {
                                                         </span>
                                                     </span>
                                                     <span className="bg-rose-400 px-3 rounded-full opacity-90 text-slate-800">
-                                                        السبت، ٧ سبتمبر ٢٠٢٤
+                                                        {formatDate(course.updatedAt)}
                                                     </span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="absolute inset-0 w-full h-full">
                                             <div className="backgrounIMG w-auto h-full md:w-full opacity-20 relative mr-auto transform ">
-                                                <din className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent to-blue-900"></din>
+                                                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent to-blue-900"></div>
                                             </div>
                                         </div>
                                     </div>
