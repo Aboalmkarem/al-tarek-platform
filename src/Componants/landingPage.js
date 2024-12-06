@@ -1,72 +1,93 @@
 import background from "../Assets/Untitled-1.png";
 import icon from "../Assets/chemistry-sticker-05.png";
 import atom from "../Assets/—Pngtree—atom icon_8473596.png";
-import chemImage from "../Assets/chem.jpg";
-import phyImage from "../Assets/phy.jpg";
-import { Link } from "react-router-dom";
+import PhysicsImg from "../Assets/phy.jpg";
+import chemistryImg from "../Assets/chem.jpg";
+// import chemImage from "../Assets/chem.jpg";
+// import phyImage from "../Assets/phy.jpg";
+// import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import { createRoot } from "react-dom/client";
+// import { createRoot } from "react-dom/client";
 import Card from "./card";
-import axios from "axios";
-import Message from "./message";
+// import axios from "axios";
+// import Message from "./message";
 
 const LandingPage = () => {
-    const [showCards, setShowCards] = useState(false);
+    const [showCards, setShowCards] = useState(true);
     const [showErrors, setShowErrors] = useState(false);
     const [err, setErr] = useState("");
-    const [categories, setCategories] = useState(false);
-    const messageRef = useRef()
-    const rootRef = useRef(null); // Ref to store the root instance
-
-    function showMessage(isErr, message) {
-        if (!rootRef.current) {
-            rootRef.current = createRoot(messageRef.current);
+    const [categories, setCategories] = useState([
+        {
+            id: 1,
+            title: "الكيمياء",
+            name: "Chemistry",
+            img: chemistryImg,
+            discription: 'شرح منهج الكيمياء بطريقة سهلة',
+            updatedAt: 'الخميس, 12 نوفمبر 2024',
+            publishedAt: 'الخميس, 12 نوفمبر 2024'
+        },
+        {
+            id: 2,
+            title: "الفيزياء",
+            name: "Physics",
+            img: PhysicsImg,
+            discription: 'شرح منهج الفيزياء بطريقة سهلة',
+            updatedAt: 'الخميس, 12 نوفمبر 2024',
+            publishedAt: 'الخميس, 12 نوفمبر 2024'
         }
-        rootRef.current.render(
-            <Message options={{ isErr: isErr, message: message }} />
-        );
-    }
+    ]);
+    // const messageRef = useRef()
+    // const rootRef = useRef(null); // Ref to store the root instance
 
-    async function getCategories() {
-        const reqOptions = {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        };
-        await axios
-            .get(
-                `${process.env.REACT_APP_NOT_SECRET_CODE}/api/categories?populate=*`,
-                reqOptions
-            )
-            .then((res) => {
-                // console.log(res.data.data)
-                if (res.data.data.length === 0) {
-                    setShowCards(true);
-                } else {
-                    setCategories(res.data.data);
-                    setShowCards(true);                    
-                }
-            })
-            .catch((error) => {
-                if (
-                    error.response?.status === 401 &&
-                    error.response?.statusText === "Unauthorized"
-                ) {
-                    showMessage(true, `Error: you must be logged in. please login first`)
-                    setErr("you must be logged in. please login first");
-                    setShowErrors(true);
-                }
-                if (error.response?.status === undefined) {
-                    showMessage(true, `Error: ${error.message}`);
-                    setErr(`${error.message}. please try again later`);
-                    setShowErrors(true);
-                }
-            });
-    }
+    // function showMessage(isErr, message) {
+    //     if (!rootRef.current) {
+    //         rootRef.current = createRoot(messageRef.current);
+    //     }
+    //     rootRef.current.render(
+    //         <Message options={{ isErr: isErr, message: message }} />
+    //     );
+    // }
 
-    useEffect(() => {
-        getCategories();
-    }, []);
+    // async function getCategories() {
+    //     const reqOptions = {
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //     };
+    //     await axios
+    //         .get(
+    //             `${process.env.REACT_APP_NOT_SECRET_CODE}/api/categories?populate=*`,
+    //             reqOptions
+    //         )
+    //         .then((res) => {
+    //             // console.log(res.data.data)
+    //             if (res.data.data.length === 0) {
+    //                 setShowCards(true);
+    //             } else {
+    //                 setCategories(res.data.data);
+    //                 setShowCards(true);                    
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             if (
+    //                 error.response?.status === 401 &&
+    //                 error.response?.statusText === "Unauthorized"
+    //             ) {
+    //                 showMessage(true, `Error: you must be logged in. please login first`)
+    //                 setErr("you must be logged in. please login first");
+    //                 setShowErrors(true);
+    //             }
+    //             if (error.response?.status === undefined) {
+    //                 showMessage(true, `Error: ${error.message}`);
+    //                 setErr(`${error.message}. please try again later`);
+    //                 setShowErrors(true);
+    //             }
+    //         });
+    // }
+
+    // useEffect(() => {
+    //     getCategories();
+    // }, []);
 
     return (
         <div className="landing-page">
@@ -114,17 +135,17 @@ const LandingPage = () => {
                                     return (
                                         <Card
                                             key={category.id}
-                                            link={`courses/${category.attributes.name}`}
-                                            img={`${process.env.REACT_APP_NOT_SECRET_CODE}${category.attributes.coverIMG.data.attributes.url}`}
+                                            link={`courses/${category.name}`}
+                                            img={`${category.img}`}
                                             class="card"
-                                            name={category.attributes.title}
-                                            info={category.attributes.discription}
+                                            name={category.title}
+                                            info={category.discription}
                                             // isSub={category.isSub}
                                             editDate={
-                                                category.attributes.updatedAt
+                                                category.updatedAt
                                             }
                                             publishDate={
-                                                category.attributes.publishedAt
+                                                category.publishedAt
                                             }
                                         />
                                     );

@@ -1,79 +1,79 @@
 import "./user.css";
 import profileIMG from "../../Assets/profileIMG.svg";
 import { useEffect, useState } from "react";
-import { getUser } from "../handler";
+// import { getUser } from "../handler";
 import { MdOutlineLock } from "react-icons/md";
-import axios from "axios";
+// import axios from "axios";
 
 const User = ({ showMessage }) => {
     const [isAutherized, setIsAuthenticated] = useState(
         localStorage.getItem("token") ? true : false
     );
     const [user, setUser] = useState({
-        username: "",
-        email: "",
+        username: "example",
+        email: "example@example.com",
     });
     const [isChangingPassword, setIsChangingPassword] = useState(false)
 
-    useEffect(() => {
-        if (isAutherized) {
-            getUser()
-                .then((res) => {
-                    setUser({
-                        username: res.data.username,
-                        email: res.data.email,
-                    });
-                })
-                .catch((err) => {
-                    if (err.status === 403 || err.status === 401) {
-                        setIsAuthenticated(false);
-                    }
-                    if (err.response === undefined) {
-                        console.log(err.message);
-                        showMessage(true, `Error: ${err.message}`);
-                    }
-                });
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (isAutherized) {
+    //         getUser()
+    //             .then((res) => {
+    //                 setUser({
+    //                     username: res.data.username,
+    //                     email: res.data.email,
+    //                 });
+    //             })
+    //             .catch((err) => {
+    //                 if (err.status === 403 || err.status === 401) {
+    //                     setIsAuthenticated(false);
+    //                 }
+    //                 if (err.response === undefined) {
+    //                     console.log(err.message);
+    //                     showMessage(true, `Error: ${err.message}`);
+    //                 }
+    //             });
+    //     }
+    // }, []);
 
-    async function makeRequest(reqOptions) {
-        axios
-            .post(`${process.env.REACT_APP_NOT_SECRET_CODE}/api/auth/change-password`, reqOptions, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-            })
-            .then((res) => {
+    // async function makeRequest(reqOptions) {
+    //     axios
+    //         .post(`${process.env.REACT_APP_NOT_SECRET_CODE}/api/auth/change-password`, reqOptions, {
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 Authorization: `Bearer ${localStorage.getItem("token")}`,
+    //             },
+    //         })
+    //         .then((res) => {
                 
-                if (res.data.jwt && res.data.user) {
-                    showMessage(false, `successfull changing password`)
-                    localStorage.setItem("token", res.data.jwt);
-                    setIsAuthenticated(true);
-                    setIsChangingPassword(!isChangingPassword)
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-                if (err.response?.data?.error?.message !== undefined) {
-                    showMessage(true, `Error: ${err.response?.data?.error?.message}`)
-                } else {
-                    showMessage(true, `Error: ${err.message}`)
-                }
-            });
-    }
+    //             if (res.data.jwt && res.data.user) {
+    //                 showMessage(false, `successfull changing password`)
+    //                 localStorage.setItem("token", res.data.jwt);
+    //                 setIsAuthenticated(true);
+    //                 setIsChangingPassword(!isChangingPassword)
+    //             }
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //             if (err.response?.data?.error?.message !== undefined) {
+    //                 showMessage(true, `Error: ${err.response?.data?.error?.message}`)
+    //             } else {
+    //                 showMessage(true, `Error: ${err.message}`)
+    //             }
+    //         });
+    // }
 
-    async function changePassword(event) {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        const jsonData = Object.fromEntries(formData);
-        if ( jsonData.password !== jsonData.passwordConfirmation) {
-            showMessage(true, `Passwords do not match`)
-            return;
-        }
-        const reqBody = JSON.stringify(jsonData)
-        await makeRequest(reqBody);
-    }
+    // async function changePassword(event) {
+    //     event.preventDefault();
+    //     const formData = new FormData(event.target);
+    //     const jsonData = Object.fromEntries(formData);
+    //     if ( jsonData.password !== jsonData.passwordConfirmation) {
+    //         showMessage(true, `Passwords do not match`)
+    //         return;
+    //     }
+    //     const reqBody = JSON.stringify(jsonData)
+    //     await makeRequest(reqBody);
+    // }
 
     return (
         <div className="user">
@@ -108,9 +108,9 @@ const User = ({ showMessage }) => {
                                                                 change password
                                                             </h4>
                                                             <form
-                                                                onSubmit={(e) =>
-                                                                    changePassword(e)
-                                                                }
+                                                                // onSubmit={(e) =>
+                                                                //     changePassword(e)
+                                                                // }
                                                             >
                                                                 <div className="form-group">
                                                                     <input

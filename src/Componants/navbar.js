@@ -2,60 +2,61 @@ import { Link } from "react-router-dom";
 import logo from "../Assets/logo.png";
 import { useEffect, useRef, useState } from "react";
 import { FaUser } from "react-icons/fa";
-import { getUser, signOut } from "./handler";
+// import { getUser, signOut } from "./handler";
 import { useNavigate } from "react-router";
-import Message from "./message";
-import { createRoot } from "react-dom/client";
+// import Message from "./message";
+// import { createRoot } from "react-dom/client";
 
 const Navbar = ({ isChecked, handleChange }) => {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     let drop = useRef();
-    let messageRef = useRef();
-    const rootRef = useRef(null); // Ref to store the root instance
+    // let messageRef = useRef();
+    // const rootRef = useRef(null); // Ref to store the root instance
     const [username, setUserName] = useState(null);
     const [isAutherized, setIsAuthenticated] = useState(
         localStorage.getItem("token") ? true : false
     );
 
-    useEffect(() => {
-        if (isAutherized) {
-            getUser()
-                .then((res) => {
-                    setUserName(res.data.username);
-                })
-                .catch((err) => {
-                    if (err.status === 403 || err.status === 401) {
-                        setIsAuthenticated(false);
-                    }
-                    if (err.response === undefined) {
-                        showMessage(true, `Error: ${err.message}`);
-                    }
-                });
-            let handleClickOutside = (e) => {
-                if (!drop.current.contains(e.target)) {
-                    setOpen(false);
-                }
-            };
-            document.addEventListener("mousedown", handleClickOutside);
-            return () => {
-                document.removeEventListener("mousedown", handleClickOutside);
-            };
-        }
-    });
+    // useEffect(() => {
+    //     if (isAutherized) {
+    //         getUser()
+    //             .then((res) => {
+    //                 setUserName(res.data.username);
+    //             })
+    //             .catch((err) => {
+    //                 if (err.status === 403 || err.status === 401) {
+    //                     setIsAuthenticated(false);
+    //                 }
+    //                 if (err.response === undefined) {
+    //                     // showMessage(true, `Error: ${err.message}`);
+    //                     console.log(`Error: ${err.message}`);
+    //                 }
+    //             });
+    //         let handleClickOutside = (e) => {
+    //             if (!drop.current.contains(e.target)) {
+    //                 setOpen(false);
+    //             }
+    //         };
+    //         document.addEventListener("mousedown", handleClickOutside);
+    //         return () => {
+    //             document.removeEventListener("mousedown", handleClickOutside);
+    //         };
+    //     }
+    // });
 
-    function showMessage(isErr, message) {
-        if (!rootRef.current) {
-            rootRef.current = createRoot(messageRef.current);
-        }
-        rootRef.current.render(
-            <Message options={{ isErr: isErr, message: message }} />
-        );
-    }
+    // function showMessage(isErr, message) {
+    //     if (!rootRef.current) {
+    //         rootRef.current = createRoot(messageRef.current);
+    //     }
+    //     rootRef.current.render(
+    //         <Message options={{ isErr: isErr, message: message }} />
+    //     );
+    // }
 
     return (
         <header className="nav">
-            <div ref={messageRef}></div>
+            {/* <div ref={messageRef}></div> */}
             <div className="left-icons">
                 <Link to="/al-tarek-platform">
                     <img src={logo} alt="Logo" />
@@ -147,12 +148,12 @@ const Navbar = ({ isChecked, handleChange }) => {
                                 <Link to="#">
                                     <li
                                         onClick={() => {
-                                            showMessage(
-                                                false,
-                                                "sign out successfully"
-                                            );
+                                            // showMessage(
+                                            //     false,
+                                            //     "sign out successfully"
+                                            // );
                                             setOpen(!open);
-                                            signOut(navigate);
+                                            // signOut(navigate);
                                         }}
                                     >
                                         تسجيل خروج

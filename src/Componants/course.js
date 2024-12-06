@@ -1,83 +1,95 @@
 import { useEffect, useRef, useState } from "react";
-import axios from "axios";
-import Message from "./message";
-import { createRoot } from "react-dom/client";
-import { formatDate } from "./handler";
+import PhysicsImg from "../Assets/phy.jpg";
+import chemistryImg from "../Assets/chem.jpg";
+// import axios from "axios";
+// import Message from "./message";
+// import { createRoot } from "react-dom/client";
+// import { formatDate } from "./handler";
 
 const Course = () => {
-    const [showData, setShowData] = useState(false);
+    const [showData, setShowData] = useState(true);
     const [showVideo, setShowVideo] = useState(false);
-    const [course, setCourse] = useState();
+    const [course, setCourse] = useState([
+        {
+            id: 1,
+            title: "الكيمياء",
+            name: "Chemistry",
+            img: chemistryImg,
+            discription: 'شرح منهج الكيمياء بطريقة سهلة',
+            updatedAt: 'الخميس, 12 نوفمبر 2024',
+            publishedAt: 'الخميس, 12 نوفمبر 2024'
+        }
+    ]);
     const [showErrors, setShowErrors] = useState({
         isErr: false,
         message: "",
     });
-    const messageRef = useRef();
-    const rootRef = useRef(null); // Ref to store the root instance
+    // const messageRef = useRef();
+    // const rootRef = useRef(null); // Ref to store the root instance
 
-    function showMessage(isErr, message) {
-        if (!rootRef.current) {
-            rootRef.current = createRoot(messageRef.current);
-        }
-        rootRef.current.render(
-            <Message options={{ isErr: isErr, message: message }} />
-        );
-    }
+    // function showMessage(isErr, message) {
+    //     if (!rootRef.current) {
+    //         rootRef.current = createRoot(messageRef.current);
+    //     }
+    //     rootRef.current.render(
+    //         <Message options={{ isErr: isErr, message: message }} />
+    //     );
+    // }
 
-    async function getCourse() {
-        const reqOptions = {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-        };
-        axios
-            .get(
-                `${process.env.REACT_APP_NOT_SECRET_CODE}/api/courses/${
-                    window.location.pathname.split("/course/")[1]
-                }?populate=*`,
-                reqOptions
-            )
-            .then((res) => {
-                // console.log(res.data.data.attributes);
-                if (res.data.data.length === 0) {
-                    setShowData(true);
-                } else {
-                    setCourse(res.data.data.attributes);
-                    setShowData(true);
-                }
-            })
-            .catch((error) => {
-                if (
-                    error.response?.status === 401 &&
-                    error.response?.statusText === "Unauthorized"
-                ) {
-                    showMessage(
-                        true,
-                        `Error: you must be logged in. please login first`
-                    );
-                    setShowErrors({
-                        isErr: true,
-                        message: "you must be logged in. please login first",
-                    });
-                }
-                if (error.response?.status === undefined) {
-                    showMessage(true, `Error: ${error.message}`);
-                    setShowErrors({
-                        isErr: true,
-                        message: `${error.message}. please try again later`,
-                    });
-                }
-            });
-    }
+    // async function getCourse() {
+    //     const reqOptions = {
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             Authorization: `Bearer ${localStorage.getItem("token")}`,
+    //         },
+    //     };
+    //     axios
+    //         .get(
+    //             `${process.env.REACT_APP_NOT_SECRET_CODE}/api/courses/${
+    //                 window.location.pathname.split("/course/")[1]
+    //             }?populate=*`,
+    //             reqOptions
+    //         )
+    //         .then((res) => {
+    //             // console.log(res.data.data.attributes);
+    //             if (res.data.data.length === 0) {
+    //                 setShowData(true);
+    //             } else {
+    //                 setCourse(res.data.data.attributes);
+    //                 setShowData(true);
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             if (
+    //                 error.response?.status === 401 &&
+    //                 error.response?.statusText === "Unauthorized"
+    //             ) {
+    //                 showMessage(
+    //                     true,
+    //                     `Error: you must be logged in. please login first`
+    //                 );
+    //                 setShowErrors({
+    //                     isErr: true,
+    //                     message: "you must be logged in. please login first",
+    //                 });
+    //             }
+    //             if (error.response?.status === undefined) {
+    //                 showMessage(true, `Error: ${error.message}`);
+    //                 setShowErrors({
+    //                     isErr: true,
+    //                     message: `${error.message}. please try again later`,
+    //                 });
+    //             }
+    //         });
+    // }
 
-    useEffect(() => {
-        getCourse();
-    }, []);
+    // useEffect(() => {
+    //     getCourse();
+    // }, []);
 
     return (
         <>
-            <div ref={messageRef}></div>
+            {/* <div ref={messageRef}></div> */}
             <div className="course-page">
                 {showErrors.isErr ? (
                     <h2>{showErrors.message}</h2>
@@ -101,7 +113,8 @@ const Course = () => {
                                                         </span>
                                                     </span>
                                                     <span className="bg-blue-400 px-3 rounded-full opacity-90 text-slate-800">
-                                                        {formatDate(course.createdAt)}
+                                                        {/* {formatDate(course.createdAt)} */}
+                                                        11-11-2024
                                                     </span>
                                                 </div>
                                                 <div className="flex flex-wrap flex-row lg:space-x-reverse md:space-x-reverse sm:space-x-reverse space-x-reverse space-x-2">
@@ -112,7 +125,8 @@ const Course = () => {
                                                         </span>
                                                     </span>
                                                     <span className="bg-rose-400 px-3 rounded-full opacity-90 text-slate-800">
-                                                        {formatDate(course.updatedAt)}
+                                                        {/* {formatDate(course.updatedAt)} */}
+                                                        11-11-2024
                                                     </span>
                                                 </div>
                                             </div>
@@ -133,7 +147,7 @@ const Course = () => {
                                                 </div>
                                                 <div className="w-full max-w-4xl mx-auto rounded-2xl shadow-large overflow-hidden border border-secondary-container smooth clr-text-primary">
                                                     <video
-                                                        src={`${process.env.REACT_APP_NOT_SECRET_CODE}${course.courseVideo.data[0].attributes.url}`}
+                                                        // src={`${process.env.REACT_APP_NOT_SECRET_CODE}${course.courseVideo.data[0].attributes.url}`}
                                                         controls={true}
                                                     ></video>
                                                 </div>
@@ -145,7 +159,7 @@ const Course = () => {
                                                         <div className="p-4 space-y-8">
                                                             <div className="overflow-hidden rounded-md">
                                                                 <img
-                                                                    src={`${process.env.REACT_APP_NOT_SECRET_CODE}${course.courseCoverIMG.data.attributes.url}`}
+                                                                    src={`${course.img}`}
                                                                     alt="img"
                                                                 ></img>
                                                             </div>
@@ -160,7 +174,7 @@ const Course = () => {
                                                     <div className="space-y-5">
                                                         <div className="rounded-2xl shadow-2xl overflow-hidden">
                                                             <img
-                                                                src={`${process.env.REACT_APP_NOT_SECRET_CODE}${course.courseCoverIMG.data.attributes.url}`}
+                                                                src={`${course.img}`}
                                                                 alt="img"
                                                             ></img>
                                                         </div>
