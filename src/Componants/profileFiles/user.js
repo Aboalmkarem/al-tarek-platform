@@ -34,6 +34,7 @@ const User = ({ showMessage }) => {
                     }
                 });
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     async function makeRequest(reqOptions) {

@@ -295,22 +295,15 @@ header .right-buttons {
 }
 /*categories-section*/
 .categories {
-    display: flex;
-    flex-direction: column;
     width: 100%;
     padding-top: 6rem;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
     font-weight: 400;
     color: var(--text);
     transition: background .15s;
-    /* display: grid; */
-    /* grid-template-columns: repeat(auto-fit, minmax(33rem, 1fr)); */
-    /* width: 100%; */
     min-height: 90vh;
-    /* justify-items: center; */
-    /* align-content: center; */
-    /* padding: 2rem; */
-    /* gap: 2rem; */
+    justify-items: center;
+    align-content: center;
     border-radius: 10px;
     background-color: #33beea;
 }
@@ -321,6 +314,8 @@ header .right-buttons {
     justify-items: center;
     padding-inline: 2rem;
     min-height: 90vh;
+    width: 90%;
+    margin-inline: auto;
 } 
 
 .categories .card {

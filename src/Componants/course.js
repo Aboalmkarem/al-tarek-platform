@@ -3,17 +3,30 @@ import axios from "axios";
 import Message from "./message";
 import { createRoot } from "react-dom/client";
 import { formatDate } from "./handler";
+import StaticCourse from "./static/staticCourse";
 
 const Course = () => {
-    const [showData, setShowData] = useState(false);
-    const [showVideo, setShowVideo] = useState(false);
-    const [course, setCourse] = useState();
-    const [showErrors, setShowErrors] = useState({
-        isErr: false,
-        message: "",
+    const [empty, setEmpty] = useState({
+        isEmpty: false,
+        message: '',
     });
+    const [err, setErr] = useState({
+        isError: false,
+        message: ''
+    });
+    const [isShowVideo, setIsShowVideo] = useState(false);
+    const [course, setCourse] = useState();
     const messageRef = useRef();
     const rootRef = useRef(null); // Ref to store the root instance
+
+    function showVideo() {
+        if (!isShowVideo) {
+            window.scrollTo(0, 0);
+            setIsShowVideo(true);
+        } else {
+            return
+        }
+    }
 
     function showMessage(isErr, message) {
         if (!rootRef.current) {
@@ -41,10 +54,9 @@ const Course = () => {
             .then((res) => {
                 // console.log(res.data.data.attributes);
                 if (res.data.data.length === 0) {
-                    setShowData(true);
+                    setEmpty(true);
                 } else {
                     setCourse(res.data.data.attributes);
-                    setShowData(true);
                 }
             })
             .catch((error) => {
@@ -56,14 +68,14 @@ const Course = () => {
                         true,
                         `Error: you must be logged in. please login first`
                     );
-                    setShowErrors({
+                    setErr({
                         isErr: true,
                         message: "you must be logged in. please login first",
                     });
                 }
                 if (error.response?.status === undefined) {
                     showMessage(true, `Error: ${error.message}`);
-                    setShowErrors({
+                    setErr({
                         isErr: true,
                         message: `${error.message}. please try again later`,
                     });
@@ -73,15 +85,14 @@ const Course = () => {
 
     useEffect(() => {
         getCourse();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
         <>
             <div ref={messageRef}></div>
             <div className="course-page">
-                {showErrors.isErr ? (
-                    <h2>{showErrors.message}</h2>
-                ) : showData ? (
+                {course ? (
                     <div className="flex flex-col justify-between h-full w-full relative min-h-screen">
                         <div className="w-full">
                             <div className="bg-outer-container smooth clr-text-primary negative-nav-margin posisitve-nav-padding-top">
@@ -124,7 +135,7 @@ const Course = () => {
                                         </div>
                                     </div>
                                     <div className="px-2 lg:px-4 sm:px-10 relative py-0 space-y-10">
-                                        {showVideo ? (
+                                        {isShowVideo ? (
                                             <>
                                                 <div className="flex justify-center items-center py-5">
                                                     <div className="font-bold text-2xl rounded-full border-2 text-white overflow-hidden border-yellow-500 bg-yellow-500 py-3 px-5">
@@ -209,15 +220,7 @@ const Course = () => {
                                                             </span>
                                                             <button
                                                                 className="self-start border-2 smooth false text-base bg-yellow-500 border-yellow-500 hover:bg-opacity-0 hover:text-yellow-400 text-white rounded-md  px-4 py-2 "
-                                                                onClick={() => {
-                                                                    window.scrollTo(
-                                                                        0,
-                                                                        0
-                                                                    );
-                                                                    setShowVideo(
-                                                                        !showVideo
-                                                                    );
-                                                                }}
+                                                                onClick={() => showVideo()}
                                                             >
                                                                 مشاهدة الفيديو
                                                             </button>
@@ -235,7 +238,7 @@ const Course = () => {
                         </div>
                     </div>
                 ) : (
-                    <h1>Loading...</h1>
+                    <StaticCourse err={err} empty={empty} isShowVideo={isShowVideo}/>
                 )}
             </div>
         </>

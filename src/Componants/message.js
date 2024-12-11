@@ -5,6 +5,7 @@ const Message = ({ options }) => {
 
     useEffect(() => {
         showMessage()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [options])
     
     function showMessage() {
